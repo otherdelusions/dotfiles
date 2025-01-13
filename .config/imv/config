@@ -1,0 +1,6 @@
+[options]
+background = checks
+scaling_mode = full
+overlay = true
+overlay_position_bottom = true
+overlay_font = Monospace:12

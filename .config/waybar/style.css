@@ -1,0 +1,113 @@
+@import "colors.css";
+
+/* WINDOW */
+* {
+  border: none;
+  font-family: "Iosevka Nerd Font";
+  font-weight: 400;
+  font-size: 14px;
+  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+  min-width: 22px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+/* MISC */
+#tray,
+#custom-media {
+  color: @grey;
+  background-color: transparent;
+  border-radius: 4px;
+  padding: 6px;
+  margin: 4px 5px 4px 5px;
+}
+
+#custom-media {
+  border: 2px solid @black;
+}
+
+#clock {
+  background-color: transparent;
+  color: @white;
+  padding: 10px 0 0 0;
+}
+
+/* WORKSPACES */
+#workspaces button {
+  all: initial;
+  padding: 8px 5px;
+  margin: 4px 5px;
+  color: @foreground;
+  background-color: @grey;
+  box-shadow:
+    inset 2px 2px 1px @greyish,
+    inset -2px -2px 1px black;
+}
+
+#workspaces button:hover {
+  color: @blue;
+}
+
+#workspaces button:not(.empty):not(.active) {
+  color: @magenta;
+}
+
+#workspaces button.active {
+  background-color: @black;
+  box-shadow:
+    inset 2px 2px 1px black,
+    inset -2px -2px 1px @grey;
+}
+
+/* PULSEAUDIO */
+#pulseaudio:not(.muted),
+#pulseaudio.microphone:not(.source-muted) {
+  color: @foreground;
+  background-color: @grey;
+  box-shadow:
+    inset 2px 2px 1px @greyish,
+    inset -2px -2px 1px black;
+}
+
+#pulseaudio.microphone {
+  padding: 8px 5px 8px 2px;
+  margin: 4px 5px;
+}
+
+#pulseaudio {
+  padding: 5px 0;
+  margin: 4px 5px;
+}
+
+.modules-right {
+  background-color: @black;
+  box-shadow:
+    inset 2px 2px 1px @greyish,
+    inset -2px -2px 1px black;
+}
+
+#pulseaudio.microphone.source-muted,
+#pulseaudio.muted {
+  background-color: @black;
+  box-shadow:
+    inset 2px 2px 1px black,
+    inset -2px -2px 1px @grey;
+}
+
+/* BATTERY AND NETWORK */
+#battery:not(.critical),
+#network {
+  color: @foreground;
+  background-color: transparent;
+  padding: 7px;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}

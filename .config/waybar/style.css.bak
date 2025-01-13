@@ -1,0 +1,105 @@
+@import "colors.css";
+
+* {
+  border: none;
+  font-family: "Iosevka Nerd Font";
+  font-weight: 400;
+  font-size: 14px;
+  font-feature-settings: '"zero", "ss01", "ss02", "ss03", "ss04", "ss05", "cv31"';
+  min-width: 22px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+#tray,
+#custom-media {
+  color: @grey;
+  background-color: @background;
+  border-radius: 4px;
+  padding: 6px;
+  margin: 4px 5px 4px 5px;
+}
+
+#custom-media {
+  border: 2px solid @black;
+}
+
+#clock {
+  background-color: @black;
+  color: @magenta;
+  border-radius: 4px;
+  margin: 5px;
+  padding: 7px;
+}
+
+#workspaces button {
+  all: initial;
+  border-radius: 4px;
+  padding: 6px;
+  margin: 4px 5px 4px 5px;
+  border: 2px solid @black;
+  color: @foreground;
+  /* background-color: @background; */
+  background: linear-gradient(180deg, #373738 0%, #202020 100%);
+  box-shadow: #6e31a1ba 0 0 0 1px, #ffffff47 0 1px 0px 0 inset, 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  /* background: linear-gradient(0deg, rgba(30, 30, 30, 1) 0%, rgba(70, 70, 70, 1) 50%, rgba(70, 70, 70, 1) 70%, rgba(100, 100, 100, 1) 100%); */
+}
+
+#workspaces button:hover {
+  border-color: @white;
+}
+
+#workspaces button:not(.empty):not(.active) {
+  color: @magenta;
+  /* box-shadow: inset 0px 10px 7px rgba(11, 11, 11, 0.8); */
+}
+
+#workspaces button.active {
+  color: @greyish;
+  /* background-color: @black; */
+  /* transition: background 100ms; */
+  background: linear-gradient(180deg, rgba(20, 20, 20, 1) 0%, rgba(44, 44, 44, 1) 70%, rgba(62, 62, 62, 1) 100%);
+  /* box-shadow: inset 0px 10px 7px rgba(1, 1, 1, 0.8); */
+  /* box-shadow: 0px 0px 14px rgba(190, 149, 255, 1); */
+}
+
+#pulseaudio {
+  font-size: 12px;
+}
+
+#pulseaudio.microphone {
+  padding-right: 5px;
+  padding-left: 2px;
+}
+
+#pulseaudio:not(.muted),
+#pulseaudio.microphone:not(.source-muted) {
+  color: @foreground
+}
+
+#pulseaudio.microphone.source-muted,
+#pulseaudio.muted {
+  color: @greyish;
+}
+
+#pulseaudio,
+#battery:not(.critical),
+#network {
+  /* color: @foreground; */
+  /* background-color: @black; */
+  background: linear-gradient(180deg, #373738 0%, #202020 100%);
+  box-shadow: #6e31a1ba 0 0 0 1px, #ffffff47 0 1px 0px 0 inset, 0 1px 2px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  margin: 0px 5px 5px 5px;
+  padding: 7px;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}

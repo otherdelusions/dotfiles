@@ -1,0 +1,34 @@
+[global]
+	width = (50, 300)
+	offset = 20x20
+	sort = update
+	
+	frame_width = 2
+	frame_color = "#484848"
+	background = "#161616"
+	
+	corner_radius = 4
+	padding = 10
+	gap_size = 10
+
+	font = Iosevka Nerd Font 10
+
+	dmenu = /usr/local/bin/rofi
+
+	icon_theme = "Adwaita"
+	icon_path = "/usr/share/icons/Adwaita/symbolic/status"
+	default_icon = "dialog-information-symbolic"
+	min_icon_size = 24
+	
+	force_xwayland = false	
+
+[urgency_low]
+	timeout = 3
+	
+[urgency_normal]
+	timeout = 6
+	
+[urgency_critical]
+	timeout = 20
+	frame_color = "#ca4780"
+	default_icon = "dialog-warning-symbolic"

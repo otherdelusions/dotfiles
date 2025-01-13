@@ -1,0 +1,29 @@
+[manager]
+show_hidden = true
+ratio = [2, 5, 6]
+sort_by = "natural"
+linemode = "permissions"
+scrolloff = 8
+
+[preview]
+image_delay = 60
+ueberzug_offset = [1, 1, 0, 0]
+
+[opener]
+edit = [
+	{ run = '${EDITOR:-hx} "$@"', desc = "$EDITOR", block = true, for = "unix" },
+]
+open = [
+	{ run = 'xdg-open "$1"',                desc = "Open", for = "linux" },
+]
+reveal = [
+	{ run = 'xdg-open "$(dirname "$1")"',           desc = "Reveal", for = "linux" },
+	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
+]
+extract = [
+	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
+]
+play = [
+	{ run = 'mpv "$@"', orphan = true, for = "unix" },
+	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+]

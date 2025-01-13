@@ -1,0 +1,13 @@
+theme = "carbonfox"
+
+[editor]
+line-number = "relative"
+mouse = false
+bufferline = "multiple"
+color-modes = true
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+
+[editor.cursor-shape]
+insert = "bar"

@@ -1,0 +1,147 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "left",
+  "margin-top": 0,
+  "margin-right": 0,
+  "margin-left": 0,
+  "modules-left": [
+    "hyprland/workspaces",
+    "clock",
+    "clock#date",
+  ],
+  "modules-center": [
+    "custom/media"
+  ],
+  "modules-right": [
+    "tray",
+    "pulseaudio#microphone",
+    "pulseaudio",
+    "network",
+    "battery"
+  ],
+  "custom/void": {
+    "format": "  ",
+    "tooltip": false
+  },
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "tooltip": false,
+    "all-outputs": true,
+    "show-special": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": [],
+      "6": [],
+      "7": []
+    },
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "6": "6",
+      "7": "7",
+      "special": "s"
+    }
+  },
+  "tray": {
+    // "icon-size": 22,
+    "spacing": 10
+  },
+  "clock": {
+    //"format": "<span color='#dde1e6'>  </span>{:%H:%M <span color='#dde1e6'>|</span><span color='#dde1e6'>   </span>%d.%m.%y}",
+    //"format": "  {:%H:%M |   %d.%m.%y}",
+    "format": " \n{:%H\n%M}",
+    "tooltip": false
+  },
+  "clock#date": {
+    "format": " \n{:%d\n%m}",
+    "tooltip": false
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "tooltip": false,
+    "format": "<span color='#3ddbd9'>{icon}</span> {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "custom/media": {
+    "format": "{}",
+    "max-length": 25,
+    "escape": true,
+    "rotate": 90,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next && playerctl play",
+    "on-click-middle": "playerctl shuffle toggle",
+    "exec": "$HOME/.config/waybar/playerwatcher.sh"
+  },
+  "pulseaudio": {
+    "format": " {icon}\n{volume}%",
+    "format-muted": " 󰖁\n{volume}%",
+    "tooltip": false,
+    "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
+    "format-icons": {
+      "headphone": "󰋋",
+      "default": [
+        "󰕿",
+        "󰕿",
+        "󰖀",
+        "󰖀",
+        "󰖀",
+        "󰕾",
+        "󰕾",
+        "󰕾"
+      ]
+    }
+  },
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "󰍬",
+    "format-source-muted": "󰍭",
+    "tooltip": false,
+    "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle"
+    //"on-scroll-up": "wpctl set-volume -l 1.7 @DEFAULT_SOURCE@ 5%+",
+    //"on-scroll-down": "wpctl set-volume -l 1.7 @DEFAULT_SOURCE@ 5%-",
+  },
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "󰤨 ",
+    "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+    "format-disconnected": "󰤯 ",
+    "format-disabled": "󰤭 ",
+    "tooltip": false,
+    // "on-click-right": "rofi -show wifi -modi \"wifi:~/.config/rofi/rofi-iwd-wifi-menu/iwdrofimenu.py\" -theme ~/.config/rofi/launcher.rasi -theme-str 'window { x-offset: -67px;}' -theme-str 'window { y-offset: 10px;}' -theme-str 'window { location: northeast;}'",
+    "on-click": "sh $HOME/.config/rofi/wifimenu.sh"
+  },
+  "battery": {
+    "format": " {icon}\n{capacity}%",
+    "format-icons": [
+      "󰁺",
+      "󰁻",
+      "󰁼",
+      "󰁽",
+      "󰁾",
+      "󰁿",
+      "󰂀",
+      "󰂁",
+      "󰂂",
+      "󰁹"
+    ],
+    "format-charging": " 󰂄\n{capacity}%",
+    "tooltip": false
+  }
+}
