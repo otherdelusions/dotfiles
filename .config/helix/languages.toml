@@ -14,3 +14,10 @@ language-servers = [ "sql-language-server" ]
 [[language]]
 name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
+
+[language-server.mdpls]
+command = "mdpls"
+
+[[language]]
+name = "markdown"
+language-servers = [ "mdpls", "marksman", "markdown-oxide" ]
