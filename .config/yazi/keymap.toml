@@ -1,0 +1,12 @@
+[manager]
+prepend_keymap = [
+  # Copy to system clipboard
+  { on = "<C-y>", run = 'plugin wl-clipboard' },
+
+  # Archve compress
+  { on = [ "c", "a" ], run = 'plugin compress', desc = "Archive selected files" },
+
+  # Archive navigation
+  { on = [ "<Right>" ], run = "plugin fuse-archive --args=mount", desc = "Enter or Mount selected archive" },
+  { on = [ "<Left>" ], run = "plugin fuse-archive --args=unmount", desc = "Leave or Unmount selected archive" },
+]

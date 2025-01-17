@@ -1,0 +1,5 @@
+[plugin]
+deps = [{ use = "grappas/wl-clipboard", rev = "c4edc4f" }, { use = "Rolv-Apneseth/starship", rev = "4053c8c" }, { use = "KKV9/compress", rev = "60b24af" }, { use = "dawsers/fuse-archive", rev = "62d30df" }]
+
+[flavor]
+deps = []
