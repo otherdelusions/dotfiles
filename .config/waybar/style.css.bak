@@ -57,7 +57,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  color: @greyish;
+  color: @bright-grey;
   /* background-color: @black; */
   /* transition: background 100ms; */
   background: linear-gradient(180deg, rgba(20, 20, 20, 1) 0%, rgba(44, 44, 44, 1) 70%, rgba(62, 62, 62, 1) 100%);
@@ -81,7 +81,7 @@ window#waybar {
 
 #pulseaudio.microphone.source-muted,
 #pulseaudio.muted {
-  color: @greyish;
+  color: @bright-grey;
 }
 
 #pulseaudio,

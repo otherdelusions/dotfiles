@@ -1,5 +1,4 @@
 @define-color black #282828;
-@define-color greyish #686868;
 @define-color grey #484848;
 @define-color white #dfdfe0;
 @define-color red #ee5396;
@@ -8,6 +7,8 @@
 @define-color blue #78a9ff;
 @define-color magenta #be95ff;
 @define-color cyan #33b1ff;
+
+@define-color bright-grey #686868;
 
 @define-color background #161616;
 @define-color foreground #f2f4f8;

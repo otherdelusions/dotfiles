@@ -1,0 +1,4 @@
+* {
+    font: "Iosevka Nerd Font Mono 12";
+    font-style: "bold";
+}

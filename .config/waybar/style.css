@@ -42,7 +42,7 @@ window#waybar {
   color: @foreground;
   background-color: @grey;
   box-shadow:
-    inset 2px 2px 1px @greyish,
+    inset 2px 2px 1px @bright-grey,
     inset -2px -2px 1px black;
 }
 
@@ -67,7 +67,7 @@ window#waybar {
   color: @foreground;
   background-color: @grey;
   box-shadow:
-    inset 2px 2px 1px @greyish,
+    inset 2px 2px 1px @bright-grey,
     inset -2px -2px 1px black;
 }
 
@@ -84,7 +84,7 @@ window#waybar {
 .modules-right {
   background-color: @black;
   box-shadow:
-    inset 2px 2px 1px @greyish,
+    inset 2px 2px 1px @bright-grey,
     inset -2px -2px 1px black;
 }
 
