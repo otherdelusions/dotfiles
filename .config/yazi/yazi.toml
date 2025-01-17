@@ -16,6 +16,7 @@ edit = [
 ]
 open = [
 	{ run = 'xdg-open "$1"', desc = "Open", for = "linux" },
+	{ run = '${EDITOR:-hx} "$1"', desc = "Open in editor", for = "linux" }
 ]
 reveal = [
 	{ run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
