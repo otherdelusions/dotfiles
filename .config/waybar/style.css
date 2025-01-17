@@ -54,6 +54,8 @@ window#waybar {
   color: @magenta;
 }
 
+#pulseaudio.microphone.source-muted,
+#pulseaudio.muted,
 #workspaces button.active {
   background-color: @black;
   box-shadow:
@@ -86,14 +88,6 @@ window#waybar {
   box-shadow:
     inset 2px 2px 1px @bright-grey,
     inset -2px -2px 1px black;
-}
-
-#pulseaudio.microphone.source-muted,
-#pulseaudio.muted {
-  background-color: @black;
-  box-shadow:
-    inset 2px 2px 1px black,
-    inset -2px -2px 1px @grey;
 }
 
 /* BATTERY AND NETWORK */
