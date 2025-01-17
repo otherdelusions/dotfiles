@@ -2,107 +2,36 @@ configuration {
     show-icons:                 false;
 }
 
-@import "colors.rasi"
+@theme "carbonfox.rasi"
 @import "fonts.rasi"
 
 
+/* MAIN WINDOW */
 window {
     transparency:                "real";
     location:                    east;
     anchor:                      east;
-    fullscreen:                  false;
     width:                       100px;
     x-offset:                    -6px;
     y-offset:                    0px;
+    border: 2px 0px 0px 2px;
+    border-color: @bright-grey;
+    background-color: @black;
 
     enabled:                     true;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @foreground;
     cursor:                      "default";
-    background-color:            @background;
 }
 
-/*****----- Main Box -----*****/
+/* MAIN BOX */
 mainbox {
     enabled:                     true;
     spacing:                     10px;
     margin:                      6px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @foreground;
     background-color:            transparent;
     children:                    [ "listview" ];
 }
 
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     true;
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px;
-    border-radius:               0px;
-    border-color:                @foreground;
-    background-color:            transparent;
-    text-color:                  @foreground;
-    children:                    [ "textbox-prompt-colon", "prompt"];
-}
-
-dummy {
-    background-color:            transparent;
-}
-
-textbox-prompt-colon {
-    enabled:                     true;
-    expand:                      false;
-    str:                         "";
-    padding:                     12px 16px;
-    border-radius:               0px;
-    background-color:            @red;
-    text-color:                  @background;
-}
-prompt {
-    enabled:                     true;
-    padding:                     12px;
-    border-radius:               0px;
-    background-color:            @red;
-    text-color:                  @background;
-}
-
-/*****----- Message -----*****/
-message {
-    enabled:                     true;
-    margin:                      0px;
-    padding:                     12px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @foreground;
-    background-color:            @green;
-    text-color:                  @foreground;
-}
-textbox {
-    background-color:            inherit;
-    text-color:                  inherit;
-    vertical-align:              0.5;
-    horizontal-align:            0.5;
-    placeholder-color:           @foreground;
-    blink:                       true;
-    markup:                      true;
-}
-error-message {
-    padding:                     12px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @foreground;
-    background-color:            @background;
-    text-color:                  @foreground;
-}
-
-/*****----- Listview -----*****/
+/* LIST VIEW */
 listview {
     enabled:                     true;
     columns:                     1;
@@ -116,29 +45,20 @@ listview {
     fixed-columns:               true;
     
     spacing:                     6px;
-    margin:                      0px;
-    padding:                     0px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @foreground;
     background-color:            transparent;
-    text-color:                  @foreground;
     cursor:                      "default";
 }
 
-/*****----- Elements -----*****/
+/* ELEMENTS */
 element {
     enabled:                     true;
-    spacing:                     0px;
-    margin:                      0px;
-    padding:                     10px 10px 10px 10px;
-    border:                      0px solid;
-    border-radius:               0px;
-    border-color:                @foreground;
-    background-color:            @background;
-    text-color:                  @grey;
-    cursor:                      pointer;
+    padding:                     10px;
+    border: 3px 0px 0px 3px;
+    border-color: @bright-grey;
+    background-color:            @grey;
+    text-color:                  @foreground;
 }
+
 element-text {
     font:                        "Iosevka Nerd Font Mono bold 42";
     background-color:            transparent;
@@ -147,7 +67,10 @@ element-text {
     vertical-align:              0.5;
     horizontal-align:            0.5;
 }
+
 element selected.normal {
-    background-color:            #262626;
-    text-color:                  @purple;
+    border: 0px 3px 3px 0px;
+    border-color: @grey;
+    background-color:            #383838;
+    text-color:                  @white;
 }
