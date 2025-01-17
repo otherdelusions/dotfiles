@@ -12,7 +12,7 @@ ueberzug_offset = [1, 1, 0, 0]
 [opener]
 edit = [
 	{ run = '${EDITOR:-hx} "$@"', desc = "Edit", block = true, for = "unix" },
-	{ run = 'sudo ${EDITOR:-hx} "$@"', desc = "Edit with root", block = true, for = "unix" },
+	{ run = 'sudo -E ${EDITOR:-hx} "$@"', desc = "Edit with root", block = true, for = "unix" },
 ]
 open = [
 	{ run = 'xdg-open "$1"', desc = "Open", for = "linux" },
