@@ -19,7 +19,6 @@ open = [
 	{ run = '${EDITOR:-hx} "$1"', desc = "Open in editor", for = "linux" }
 ]
 reveal = [
-	{ run = 'xdg-open "$(dirname "$1")"', desc = "Reveal", for = "linux" },
 	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
 ]
 extract = [
@@ -28,4 +27,9 @@ extract = [
 play = [
 	{ run = 'mpv "$@"', orphan = true, for = "unix" },
 	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+]
+
+[open]
+append_rules = [
+	{ name = "*/", use = [ "edit", "open", "reveal" ] },
 ]
