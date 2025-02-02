@@ -1,0 +1,58 @@
+[manager]
+hovered         = { reversed = true }
+preview_hovered = { reversed = true }
+
+find_keyword  = { bg = "blue", fg = "black", bold = false, italic = true, underline = false, reversed = true }
+
+tab_active   = { reversed = true }
+tab_inactive = {}
+tab_width    = 1
+
+count_copied   = { fg = "black", bg = "green" }
+count_cut      = { fg = "black", bg = "red" }
+count_selected = { fg = "black", bg = "yellow" }
+
+border_symbol = "│"
+border_style  = { bg = "reset", fg = "darkgray" }
+
+syntect_theme = "~/.config/yazi/carbonfox.tmTheme"
+
+[mode]
+normal_main = { fg = "#161616", bg = "blue", bold = true }
+normal_alt = { fg = "gray", bg = "#0C0C0C" }
+select_main = { fg = "#161616", bg = "green", bold = true }
+select_alt = { fg = "gray", bg = "#0C0C0C" }
+unset_main  = { fg = "#161616", bg = "magenta", bold = true }
+unset_alt = { fg = "gray", bg = "#0C0C0C" }
+
+[status]
+separator_open  = ""
+separator_close = ""
+
+progress_label  = { fg = "#161616", bg = "yellow", bold = false }
+progress_normal = { fg = "#161616", bg = "yellow", bold = false }
+progress_error  = { fg = "#161616", bg = "red", bold = false }
+
+perm_type = { fg = "green" }
+perm_read = { fg = "yellow" }
+perm_write = { fg = "magenta" }
+perm_exec = { fg = "red" }
+perm_sep = { fg = "darkgray" }
+
+[input]
+border   = { fg = "white" }
+
+[pick]
+border   = { fg = "white" }
+
+[filetype]
+rules = [
+    { mime = "image/*", fg = "magenta" },
+    { mime = "{audio,video}/*", fg = "yellow" },
+    { mime = "application/{,g}zip", fg = "cyan" },
+    { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "cyan" },
+    { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "lightred" },
+    { name = "*", is = "orphan", fg = "white" },
+    { name = "*", is = "exec", fg = "magenta" },
+    { name = "*/", fg = "#7B7C7E"}
+]

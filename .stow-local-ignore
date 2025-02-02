@@ -21,8 +21,8 @@ _darcs
 ^/LICENSE.*
 ^/COPYING
 
-# Other ignores
-
-/.config/nvim
+# Unused packages and files
 base16.yaml
-
+assets
+nvim
+wallpaper

@@ -2,7 +2,6 @@
 show_hidden = true
 ratio = [2, 5, 6]
 sort_by = "natural"
-linemode = "permissions"
 scrolloff = 8
 
 [preview]
