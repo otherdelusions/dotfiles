@@ -15,7 +15,13 @@ window#waybar {
 }
 
 /* MISC */
-#tray,
+#tray {
+  color: @grey;
+  background-color: transparent;
+  padding: 5px 0px;
+  margin: 4px 5px 4px 5px;
+}
+
 #custom-media {
   color: @grey;
   background-color: transparent;
