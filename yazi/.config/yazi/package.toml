@@ -1,5 +1,22 @@
-[plugin]
-deps = [{ use = "grappas/wl-clipboard", rev = "c4edc4f" }, { use = "Rolv-Apneseth/starship", rev = "4053c8c" }, { use = "KKV9/compress", rev = "60b24af" }, { use = "dawsers/fuse-archive", rev = "62d30df" }]
+[[plugin.deps]]
+use = "grappas/wl-clipboard"
+rev = "c4edc4f"
+hash = "51ff959c3c26cb3889589a0f8d394f14"
+
+[[plugin.deps]]
+use = "Rolv-Apneseth/starship"
+rev = "d1cd0a3"
+hash = "d1fee6d0f74cb52d4e031dc6b9207f31"
+
+[[plugin.deps]]
+use = "KKV9/compress"
+rev = "60b24af"
+hash = "ee025be766240cc98e671754ac836da3"
+
+[[plugin.deps]]
+use = "dawsers/fuse-archive"
+rev = "a58327c"
+hash = "6a6d24880ce7666048fb81ad758c48d3"
 
 [flavor]
 deps = []
