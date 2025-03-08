@@ -23,15 +23,12 @@ window#waybar {
 }
 
 #custom-media {
-  color: @grey;
+  color: @bright-grey;
   background-color: transparent;
-  border-radius: 4px;
-  padding: 6px;
+  border: 1px solid;
+  border-radius: 0px;
+  padding: 8px 3px;
   margin: 4px 5px 4px 5px;
-}
-
-#custom-media {
-  border: 2px solid @black;
 }
 
 #clock {

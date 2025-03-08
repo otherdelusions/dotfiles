@@ -21,6 +21,7 @@ size = 13
 [window]
 decorations = "none"
 opacity = 1
+dynamic_title = true
 
 [window.padding]
 x = 15

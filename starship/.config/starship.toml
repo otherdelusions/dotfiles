@@ -4,6 +4,7 @@
 # origin_url = "https://github.com/EdenEast/nightfox.nvim"
 
 "$schema" = "https://starship.rs/config-schema.json"
+command_timeout = 1500
 
 format = """
 [░▒▓](os_bg)\

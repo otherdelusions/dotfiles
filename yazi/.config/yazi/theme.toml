@@ -31,7 +31,7 @@ separator_close = ""
 
 progress_label  = { fg = "#161616", bg = "yellow", bold = false }
 progress_normal = { fg = "#161616", bg = "yellow", bold = false }
-progress_error  = { fg = "#161616", bg = "red", bold = false }
+progress_error  = { fg = "#161616", bg = "yellow", bold = false }
 
 perm_type = { fg = "green" }
 perm_read = { fg = "yellow" }
