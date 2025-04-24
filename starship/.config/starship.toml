@@ -54,8 +54,9 @@ format = "[ $user ]($style)"
 [directory]
 style = "fg:dir_fg bg:dir_bg"
 format = "[ $path ]($style)"
-truncation_length = 15
+truncation_length = 0
 truncation_symbol = ".../"
+truncate_to_repo = false 
 
 [directory.substitutions]
 "Documents" = "󰈙 "
