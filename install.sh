@@ -2,8 +2,6 @@
 
 # Add packages you wish to install here
 # NOTE: assets folder is not meant to be stowed
-# and wallpaper package should be stowed manually using:
-# stow --verbose --adopt --target=[YOUR WALLPAPER FOLDER] wallpaper
 packages=(
   "alacritty"
   "bash"
@@ -21,3 +19,13 @@ for package in "${packages[@]}"; do
     echo -e "\nStowing package: $package"
     stow --verbose --restow --target="$HOME" "$package"
 done
+
+read -p "Enter your wallpaper folder path: " wpfolder
+
+if [ -z "$wpfolder" ]; then
+    wpfolder="$HOME/Pictures/Wallpaper"
+    echo -e "Using default location"
+fi
+
+echo -e "\nStowing package: wallpaper to: $wpfolder"
+stow --verbose --adopt --target="$wpfolder" wallpaper
