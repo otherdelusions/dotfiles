@@ -1,7 +1,10 @@
 [[language]]
 name = "go"
 auto-format = true
-formatter = { command = "goimports" }
+formatter = [ "gofumpt" ]
+
+[language-server.golangci-lint-lsp.config]
+command = ["golangci-lint", "run", "--output.json.path", "stdout", "--show-stats=false", "--issues-exit-code=1"]
 
 [language-server.sql-language-server]
 command = "sql-language-server"
@@ -13,6 +16,7 @@ language-servers = [ "sql-language-server" ]
 
 [[language]]
 name = "toml"
+auto-format = true
 formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [language-server.mdpls]
@@ -21,6 +25,13 @@ command = "mdpls"
 [[language]]
 name = "markdown"
 language-servers = [ "mdpls", "marksman", "markdown-oxide" ]
+auto-format = true
+formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md" ] }
+
+[[language]]
+name = "yaml"
+formatter = { command = 'prettier', args = ["--parser", "yaml"] }
+auto-format = true
 
 [[language]]
 name = "javascript"
