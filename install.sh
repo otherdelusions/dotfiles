@@ -6,6 +6,7 @@ packages=(
   "alacritty"
   "bash"
   "dunst"
+  "go"
   "helix"
   "hypr"
   "imv"
