@@ -29,5 +29,15 @@ function set_win_title() {
     fi
 }
 
+function yazi() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    /usr/bin/yazi "$@" --cwd-file="$tmp"
+    echo -e -n "\x1b[\x36 q" # change cursor to steady bar
+    if cwd="$(cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
+
 eval "$(starship init bash)"
 trap 'set_win_title' DEBUG
