@@ -22,7 +22,7 @@ function set_win_title() {
     local cmd="${BASH_COMMAND%% *}"
     if [[ "$cmd" == "starship_precmd" || "$cmd" == "sudo" ]]; then
         echo -ne "\033]0;$PWD\007"
-    elif [[ "$cmd" == "hx" ]] then
+    elif [[ "$cmd" == "hx" ]]; then
         echo -ne "\033]0;$cmd: $PWD\007"
     else
         echo -ne "\033]0;$cmd\007"
