@@ -3,18 +3,23 @@
 # Add packages you wish to install here
 # NOTE: assets folder is not meant to be stowed
 packages=(
-  "alacritty"
-  "bash"
-  "dunst"
-  "go"
-  "helix"
-  "hypr"
-  "imv"
-  "rofi"
-  "starship"
-  "waybar"
-  "yazi"
+    "alacritty"
+    "bash"
+    "dunst"
+    "go"
+    "helix"
+    "hypr"
+    "imv"
+    "rofi"
+    "starship"
+    "waybar"
+    "yazi"
 )
+
+if ! command -v stow >/dev/null; then
+    echo "Stow command not found! Install stow and rerun the script." >&2
+    exit 1
+fi
 
 for package in "${packages[@]}"; do
     echo -e "\nStowing package: $package"
