@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+exclude=(
+    "$(basename "$0")"
+    "common"
+    "extra"
+    "unstow"
+)
+
+deps=()
+while IFS= read -r file; do
+    base_name="$(basename "$file")"
+    if [[ ! " ${exclude[@]} " =~ " $base_name " ]]; then
+        deps+=("dots/$base_name")
+    fi
+done < <(find tasks/dots -maxdepth 1 -type f)
+
+source tasks/common
+resolve_deps
+
+# Task
+echo "${deps[@]}"

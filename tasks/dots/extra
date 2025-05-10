@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+source tasks/dots/common
+
+resolve_deps
+
+# Task
+extra_packages=(
+    nvim
+)
+
+for ep in "${extra_packages[@]}"; do
+    stow_package $ep
+done

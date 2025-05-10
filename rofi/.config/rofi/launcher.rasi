@@ -1,5 +1,5 @@
 configuration {
-    modi: "drun,window,run";
+    //modi: "drun,run,window";
     show-icons: true;
     display-drun: "drun";
     display-run: "run";
@@ -53,7 +53,7 @@ entry {
     background-color: white;
     text-color: @black;
     cursor: text;
-    placeholder: "Search";
+    placeholder: "search";
     placeholder-color: @bright-grey;
 }
 
@@ -63,7 +63,7 @@ listview {
     columns: 1;
     lines: 10;
     cycle: true;
-    dynamic: true;
+    dynamic: false;
     scrollbar: true;
     layout: vertical;
     reverse: false;

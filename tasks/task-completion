@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing bash-completion
+
+mkdir -p $HOME/.local/share/bash-completion/completions
+
+cat <<'EOF' >$HOME/.local/share/bash-completion/completions/dotask
+#!/bin/bash
+
+_dotask_completion() {
+    local cur="${COMP_WORDS[COMP_CWORD]}"
+    local tasks_dir="./tasks"
+    local base_dir="$tasks_dir"
+    local comp_list=()
+    local comp_dirs=()
+
+    local stripped_cur="${cur#./}"
+
+    local dir_part=""
+    local file_part="$stripped_cur"
+    if [[ "$stripped_cur" == */* ]]; then
+        dir_part="${stripped_cur%/*}"
+        file_part="${stripped_cur##*/}"
+        base_dir="$tasks_dir/$dir_part"
+    fi
+
+    if [[ -d "$base_dir" ]]; then
+        # Use null-separated output to handle spaces safely
+        while IFS= read -r -d $'\0' item; do
+            local name="$(basename "$item")"
+            if [[ "$name" == "$file_part"* ]]; then
+                if [[ -d "$item" ]]; then
+                    if [[ -n "$dir_part" ]]; then
+                        comp_dirs+=("$dir_part/$name/")
+                    else
+                        comp_dirs+=("$name/")
+                    fi
+                else
+                    if [[ -n "$dir_part" ]]; then
+                        comp_list+=("$dir_part/$name")
+                    else
+                        comp_list+=("$name")
+                    fi
+                fi
+            fi
+        done < <(find "$base_dir" -mindepth 1 -maxdepth 1 -print0)
+    fi
+
+    COMPREPLY=("${comp_list[@]}" "${comp_dirs[@]}")
+
+    if [[ ${#COMPREPLY[@]} -eq 1 && "${COMPREPLY[0]: -1}" == "/" ]]; then
+        compopt -o nospace
+    fi
+}
+
+complete -F _dotask_completion dotask
+EOF

@@ -1,2 +1,2 @@
 #!/usr/bin/bash
-$HOME/.local/bin/iwmenu -s 3 --menu custom --menu-command "rofi -dmenu -theme ~/.config/rofi/launcher.rasi"
+$HOME/.local/bin/iwmenu -s 3 --launcher custom --launcher-command "rofi -dmenu -theme ~/.config/rofi/launcher.rasi"

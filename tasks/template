@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+echo "Hello, Void!"
+echo "Straight from $(pwd)"
+echo "Living in $(basename "$0")"

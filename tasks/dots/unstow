@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+if ! command -v stow >/dev/null; then
+    echo "Stow command not found. Install stow and rerun the task" >&2
+    exit 1
+fi
+
+read -p "Enter package name to remove: " unstow
+
+if [ -z "$unstow" ]; then
+    echo "No package specified"
+    exit 1
+fi
+
+echo -e "\nRemoving package: $unstow"
+stow --delete --target="$HOME" $unstow

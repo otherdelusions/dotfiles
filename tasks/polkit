@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing polkit
+
+if ! enable_service polkitd; then
+    exit 1
+fi

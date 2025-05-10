@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
 rofi \
--show drun \
--theme ~/.config/rofi/launcher.rasi
+    -show drun \
+    -modes "drun,run,window" \
+    -theme ~/.config/rofi/launcher.rasi

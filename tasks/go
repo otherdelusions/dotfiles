@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+#TODO
+# Task
+install_if_missing go curl
+
+go install github.com/go-delve/delve/cmd/dlv@latest
+go install vdan.cc/gofumpt@latest
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/HEAD/install.sh | sh -s -- -b $(go env GOPATH)/bin v2.1.6
+go install github.com/nametake/golangci-lint-langserver@latest
+go install golang.org/x/tools/gopls@latest
+go install github.com/hyprland-community/hyprls/cmd/hyprls@latest

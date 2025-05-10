@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+deps=(
+    seat
+)
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing pipewire
+sudo mkdir -p /etc/pipewire/pipewire.conf.d
+sudo ln -sf /usr/share/examples/wireplumber/10-wireplumber.conf /etc/pipewire/pipewire.conf.d/
+sudo ln -sf /usr/share/examples/pipewire/20-pipewire-pulse.conf /etc/pipewire/pipewire.conf.d/

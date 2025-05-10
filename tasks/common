@@ -1,0 +1,90 @@
+#!/usr/bin/env bash
+
+cleanup() {
+    echo "Exiting..."
+    exit 1
+}
+
+trap cleanup SIGINT
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    echo "This script cannot be executed directly"
+    exit 1
+fi
+
+resolve_deps() {
+    for d in "${deps[@]}"; do
+        if [[ "$d" == "$(basename "$0")" ]]; then
+            echo "Tasks dependency is the task itself. Stopping recursion"
+            exit 1
+        fi
+
+        if [[ "$d" == "all" ]]; then
+            echo "Cannot have 'all' as dependency task"
+            exit 1
+        fi
+
+        echo -e "Running dependency task '$d' of task '$(basename "${BASH_SOURCE[1]}")'\n"
+        ./dotask "$d"
+        if [ $? -ne 0 ]; then
+            echo "Dependency task '$d' failed. Stopping further tasks"
+            exit 1
+        fi
+    done
+}
+
+install_if_missing() {
+    if ! grep -wq "Void" /etc/os-release; then
+        echo "Not running Void Linux. Task stopped" >&2
+        exit 1
+    fi
+
+    for p in "$@"; do
+        if ! xbps-query "$p" >/dev/null 2>&1; then
+            echo "$p not installed, running xbps-install"
+            sudo xbps-install -y "$p"
+        else
+            echo "$p is already installed"
+        fi
+    done
+}
+
+check_var() {
+    if printenv "$1" >/dev/null 2>&1; then
+        echo "Variable '$1' is set"
+        return 0
+    else
+        echo "Variable '$1' is not set"
+        return 1
+    fi
+}
+
+check_service() {
+    if sudo sv status $1 &>/dev/null; then
+        echo "Service '$1' is enabled"
+        return 0
+    else
+        echo "Service '$1' is not enabled or does not exist"
+        return 1
+    fi
+}
+
+enable_service() {
+    local service_dir="/etc/sv/$1"
+
+    if [ ! -d $service_dir ]; then
+        echo "Service '$1' does not exist"
+        exit 1
+    fi
+
+    if sudo sv status $1 &>/dev/null; then
+        echo "Service '$1' is already enabled"
+        return 0
+    fi
+
+    sudo ln -s $service_dir /var/service
+    echo "Symlinked '$1' service directory"
+
+    sleep 2
+    check_service $1
+}

@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+deps=(
+    dbus
+)
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing iwd
+if ! enable_service iwd; then
+    exit 1
+fi
+
+sudo mkdir -p /etc/iwd
+
+if [ -s /etc/iwd/main.conf ]; then
+    echo "iwd config already exists"
+else
+    cat <<'EOF' | sudo tee "/etc/iwd/main.conf" >/dev/null
+[General]
+EnableNetworkConfiguration=true
+UseDefaultInterface=true
+EOF
+fi
+
+if check_service wpa_supplicant >/dev/null; then
+    sudo unlink /var/service/wpa_supplicant
+fi

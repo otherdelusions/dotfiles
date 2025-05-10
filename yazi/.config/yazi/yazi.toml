@@ -10,25 +10,35 @@ ueberzug_offset = [1, 1, 0, 0]
 
 [opener]
 edit = [
-	{ run = '${EDITOR:-hx} "$@"', desc = "Edit", block = true, for = "unix" },
-	{ run = 'sudo -E ${EDITOR:-hx} "$@"', desc = "Edit with root", block = true, for = "unix" },
+  { run = '${EDITOR:-hx} "$@"', desc = "Edit", block = true },
+  { run = 'sudo -E ${EDITOR:-hx} "$@"', desc = "Edit with root", block = true },
 ]
-open = [
-	{ run = 'xdg-open "$1"', desc = "Open", for = "linux" },
-	{ run = '${EDITOR:-hx} "$1"', desc = "Open in editor", for = "linux" }
+
+open = [{ run = 'xdg-open "$1"', orphan = true, desc = "Open" }]
+
+exif = [
+  { run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF" },
 ]
-reveal = [
-	{ run = '''exiftool "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show EXIF", for = "unix" },
-]
-extract = [
-	{ run = 'ya pub extract --list "$@"', desc = "Extract here", for = "unix" },
-]
+
+extract = [{ run = 'ya pub extract --list "$@"', desc = "Extract here" }]
+
 play = [
-	{ run = 'mpv "$@"', orphan = true, for = "unix" },
-	{ run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info", for = "unix" },
+  { run = 'mpv "$@"', orphan = true },
+  { run = '''mediainfo "$1"; echo "Press enter to exit"; read _''', block = true, desc = "Show media info" },
 ]
 
 [open]
-append_rules = [
-	{ name = "*/", use = [ "edit", "open", "reveal" ] },
+prepend_rules = [
+  { mime = "text/*", use = [
+    "edit",
+    "open",
+    "exif",
+  ] },
+  { mime = "image/*", use = [
+    "open",
+    "exif",
+  ] },
+  { mime = "inode/directory", use = [
+    "edit",
+  ] },
 ]

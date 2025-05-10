@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing intel-ucode
+if ! grep -q microcode /proc/cpuinfo; then
+    sudo xbps-reconfigure --force linux$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')
+    echo "Regenerated initramfs"
+else
+    echo "Mircocode is loaded"
+fi
+
+install_if_missing mesa-dri intel-video-accel
