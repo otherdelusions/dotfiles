@@ -2,6 +2,7 @@
 
 deps=(
     dbus
+    hypr
 )
 
 source tasks/common
@@ -13,9 +14,7 @@ install_if_missing greetd tuigreet
 sudo mkdir -p /etc/greetd
 sudo usermod -aG video _greeter
 
-if [ -s /etc/greetd/config.toml ]; then
-    echo "greetd config already exists"
-else
+if [ ! -s /etc/greetd/config.toml ] || confirm "greetd config already exists. Overwrite?" "N"; then
     cat <<'EOF' | sudo tee "/etc/greetd/config.toml" >/dev/null
 [terminal]
 vt = 7
@@ -25,3 +24,5 @@ command = "tuigreet --remember --cmd 'dbus-run-session hyprland'"
 user = "_greeter"
 EOF
 fi
+
+enable_service greetd

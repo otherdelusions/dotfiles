@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 deps=(
-    dbus
     polkit
+    seat
 )
 
 source tasks/common
@@ -11,7 +11,7 @@ resolve_deps
 # Task
 
 repo="repository=https://raw.githubusercontent.com/Makrennel/hyprland-void/repository-x86_64-glibc"
-if [ rep -rwxq $repo /etc/xbps.d/ ]; then
+if grep -rwxq "$repo" /etc/xbps.d/; then
     echo "hypr* repository found"
 else
     cat <<EOF | sudo tee "/etc/xbps.d/hyprland-void.conf" >/dev/null

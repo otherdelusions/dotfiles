@@ -1,19 +1,5 @@
 #!/usr/bin/env bash
 
-while true; do
-    read -p "Running all tasks is dangerous. Do you want to continue? (y/N): " answer
-    answer=${answer:-n} # n if no input
-    answer=${answer,,}  # to lowercase
-
-    if [[ "$answer" == "y" ]]; then
-        break
-    elif [[ "$answer" == "n" ]]; then
-        exit 1
-    else
-        echo "Invalid response"
-    fi
-done
-
 exclude=(
     "$(basename "$0")"
     "common"
@@ -28,6 +14,11 @@ while IFS= read -r file; do
 done < <(find tasks -maxdepth 1 -type f)
 
 source tasks/common
+
+if ! confirm "Running all tasks is dangerous. Do you want to continue?" "N"; then
+    exit 1
+fi
+
 resolve_deps
 
 # Task

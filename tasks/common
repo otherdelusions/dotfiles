@@ -85,6 +85,43 @@ enable_service() {
     sudo ln -s $service_dir /var/service
     echo "Symlinked '$1' service directory"
 
-    sleep 2
+    sleep 4
     check_service $1
+}
+
+confirm() {
+    if [ $# -ne 2 ]; then
+        echo "Usage: confirm [prompt] [Y/N]"
+        exit 1
+    fi
+
+    case "$2" in
+    N | n) default_no=true ;;
+    Y | y) default_no=false ;;
+    *)
+        echo "Expected Y/N as second parameter"
+        exit 1
+        ;;
+    esac
+
+    local prompt="${1:-Continue?}"
+    while true; do
+        if $default_no; then
+            read -p "${prompt} (y/N): " answer
+            answer=${answer:-n}
+        else
+            read -p "${prompt} (Y/n): " answer
+            answer=${answer:-y}
+        fi
+
+        answer=${answer,,} # to lowercase
+
+        if [[ "$answer" == "y" ]]; then
+            return 0
+        elif [[ "$answer" == "n" ]]; then
+            return 1
+        else
+            echo "Invalid response"
+        fi
+    done
 }

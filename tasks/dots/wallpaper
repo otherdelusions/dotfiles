@@ -7,8 +7,12 @@ resolve_deps
 
 # Task
 if ! command -v stow >/dev/null; then
-    echo "Stow command not found. Install stow and rerun the task" >&2
-    exit 1
+    if confirm "Stow command not found. Install it using xbps?" "Y"; then
+        install_if_missing stow
+    else
+        echo "Dotfile tasks require stow"
+        exit 1
+    fi
 fi
 
 read -p "Enter your wallpaper folder path (default is $HOME/Pictures/Wallpaper): " wpfolder

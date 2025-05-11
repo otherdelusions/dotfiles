@@ -1,21 +1,15 @@
 #!/usr/bin/env bash
 
-cleanup() {
-    echo "Exiting..."
-    exit 1
-}
-
-trap cleanup SIGINT
-
-if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    echo "This script cannot be executed directly"
-    exit 1
-fi
+source tasks/common
 
 stow_package() {
     if ! command -v stow >/dev/null; then
-        echo "Stow command not found. Install stow and rerun the task" >&2
-        exit 1
+        if confirm "Stow command not found. Install it using xbps?" "Y"; then
+            install_if_missing stow
+        else
+            echo "Dotfile tasks require stow"
+            exit 1
+        fi
     fi
 
     echo -e "Stowing package: $1"

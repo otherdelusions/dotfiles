@@ -15,9 +15,7 @@ fi
 
 sudo mkdir -p /etc/iwd
 
-if [ -s /etc/iwd/main.conf ]; then
-    echo "iwd config already exists"
-else
+if [ ! -s /etc/iwd/main.conf ] || confirm "iwd config already exists. Overwrite?" "N"; then
     cat <<'EOF' | sudo tee "/etc/iwd/main.conf" >/dev/null
 [General]
 EnableNetworkConfiguration=true
