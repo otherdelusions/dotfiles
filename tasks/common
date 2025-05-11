@@ -71,6 +71,8 @@ check_service() {
 
 enable_service() {
     local service_dir="/etc/sv/$1"
+    local max_att=5
+    local att=0
 
     if [ ! -d $service_dir ]; then
         echo "Service '$1' does not exist"
@@ -85,8 +87,18 @@ enable_service() {
     sudo ln -s $service_dir /var/service
     echo "Symlinked '$1' service directory"
 
-    sleep 4
-    check_service $1
+    while [ $att -lt $max_att ]; do
+        echo "Checking $1 status. Attempt $((att + 1)) of $max_att"
+        sleep 2
+        if check_service $1; then
+            echo "Service '$1' has started successfully"
+            return 0
+        fi
+        att=$((att + 1))
+    done
+
+    echo "Service '$1' failed to start after $max_att attempts"
+    return 1
 }
 
 confirm() {

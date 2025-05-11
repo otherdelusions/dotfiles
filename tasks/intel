@@ -6,8 +6,14 @@ source tasks/common
 resolve_deps
 
 # Task
+if ! lspci | grep -i vga | grep -qi intel; then
+    if confirm "Not running intel gpu. Skip this task?" "Y"; then
+        exit 0
+    fi
+fi
+
 install_if_missing intel-ucode
-if ! grep -q microcode /proc/cpuinfo; then
+if [ "$(grep microcode /proc/cpuinfo | cut -d: -f2 | head -n 1)" == "0xffffffff" ]; then
     sudo xbps-reconfigure --force linux$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')
     echo "Regenerated initramfs"
 else

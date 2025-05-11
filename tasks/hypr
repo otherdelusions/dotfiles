@@ -3,13 +3,13 @@
 deps=(
     polkit
     seat
+    intel
 )
 
 source tasks/common
 resolve_deps
 
 # Task
-
 repo="repository=https://raw.githubusercontent.com/Makrennel/hyprland-void/repository-x86_64-glibc"
 if grep -rwxq "$repo" /etc/xbps.d/; then
     echo "hypr* repository found"
@@ -22,5 +22,5 @@ fi
 sudo xbps-install -S
 
 install_if_missing hyprland-devel hyprland-protocols
-install_if_missing hypridle hyprlock hyprpaper hyprpicker
-install_if_missing wl-clipboard
+install_if_missing hypridle hyprlock hyprpaper hyprpicker hyprland-qtutils
+install_if_missing wl-clipboard noto-fonts-ttf
