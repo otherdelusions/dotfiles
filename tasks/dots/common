@@ -12,6 +12,12 @@ stow_package() {
         fi
     fi
 
+    if ! stow -n --target="$HOME" "$1" &>/dev/null; then
+        echo "You already have $1 config files!"
+        echo "Backup/remove them and try again"
+        exit 1
+    fi
+
     echo -e "Stowing package: $1"
     stow --verbose --restow --target="$HOME" "$1"
 }

@@ -3,6 +3,7 @@
 deps=(
     go
     fonts
+    dots/helix
 )
 
 source tasks/common

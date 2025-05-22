@@ -5,6 +5,7 @@ deps=(
     seat
     intel
     fonts
+    dots/hypr
 )
 
 source tasks/common
