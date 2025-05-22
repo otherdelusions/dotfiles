@@ -6,7 +6,7 @@ scrolloff = 8
 
 [preview]
 image_delay = 60
-ueberzug_offset = [1, 1, 0, 0]
+ueberzug_offset = [0, -1, 0, 0]
 
 [opener]
 edit = [
@@ -41,4 +41,23 @@ prepend_rules = [
   { mime = "inode/directory", use = [
     "edit",
   ] },
+]
+
+[plugin]
+prepend_preloaders = [
+  { mime = "{audio,video,image}/*", run = "mediainfo" },
+  { mime = "application/subrip", run = "mediainfo" },
+]
+prepend_previewers = [
+  { mime = "{audio,video,image}/*", run = "mediainfo" },
+  { mime = "application/subrip", run = "mediainfo" },
+
+  # Archive previewer
+  { mime = "application/*zip", run = "ouch" },
+  { mime = "application/x-tar", run = "ouch" },
+  { mime = "application/x-bzip2", run = "ouch" },
+  { mime = "application/x-7z-compressed", run = "ouch" },
+  { mime = "application/x-rar", run = "ouch" },
+  { mime = "application/x-xz", run = "ouch" },
+  { mime = "application/xz", run = "ouch" },
 ]
