@@ -9,6 +9,9 @@ configuration {
 	icon-theme: "SE98";
 	steal-focus: false;
 
+	font: "Iosevka Nerd Font Mono 12";
+	//font: "EnvyCodeR Nerd Font Mono 12";
+
 	matching: "normal";
 	tokenize: true;
 

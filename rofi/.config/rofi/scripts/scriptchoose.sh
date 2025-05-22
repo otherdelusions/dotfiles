@@ -12,10 +12,10 @@ run_rofi() {
 # Actions
 chosen="$(run_rofi)"
 case ${chosen} in
-$web)
+"$web")
     rofi -show websearch -modes "websearch" -theme ~/.config/rofi/launcher.rasi
     ;;
-$rec)
+"$rec")
     rofi -show videorecord -modes "videorecord" -theme ~/.config/rofi/launcher.rasi
     ;;
 esac

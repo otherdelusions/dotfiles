@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-if [ x"$@" = x"Record Screen" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
+if [ "$*" = "Record Screen" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
+    dunstctl close-all
     nohup gpu-screen-recorder \
         -w screen \
         -f 60 \
@@ -10,10 +11,11 @@ if [ x"$@" = x"Record Screen" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; 
     exit 0
 fi
 
-if [ x"$@" = x"Record Region" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
+if [ "$*" = "Record Region" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
+    dunstctl close-all
     nohup gpu-screen-recorder \
         -w region \
-        -region $(slurp -f "%wx%h+%x+%y") \
+        -region "$(slurp -f "%wx%h+%x+%y")" \
         -f 60 \
         -a "default_output|default_input" \
         -q very_high \
@@ -21,15 +23,14 @@ if [ x"$@" = x"Record Region" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; 
     exit 0
 fi
 
-if [ x"$@" = x"Stop Recording" ] && pgrep -f "gpu-screen-recorder" >/dev/null; then
+if [ "$*" = "Stop Recording" ] && pgrep -f "gpu-screen-recorder" >/dev/null; then
     pkill -SIGINT -f gpu-screen-recorder
     notify-send "Screen Record" "Stopped recording"
     exit 0
 fi
 
-if [ x"$@" = x"Stop Recording" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
+if [ "$*" = "Stop Recording" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
     notify-send "Screen Record" "gpu-screen-recorder is not currently running"
-    exit 0
 fi
 
 echo -en "\0prompt\x1fselect option\n"

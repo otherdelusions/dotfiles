@@ -8,7 +8,6 @@ configuration {
 }
 
 @theme "carbonfox.rasi"
-@import "fonts.rasi"
 
 /* MAIN WINDOW */
 window {
