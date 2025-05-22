@@ -13,5 +13,5 @@ stow_package() {
     fi
 
     echo -e "Stowing package: $1"
-    stow --verbose --restow --target="$HOME" $1
+    stow --verbose --restow --target="$HOME" "$1"
 }

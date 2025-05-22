@@ -9,9 +9,9 @@ resolve_deps
 
 # Task
 extra_packages=(
-    nvim
+    # nvim
 )
 
 for ep in "${extra_packages[@]}"; do
-    stow_package $ep
+    stow_package "$ep"
 done

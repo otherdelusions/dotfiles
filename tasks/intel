@@ -14,7 +14,7 @@ fi
 
 install_if_missing intel-ucode
 if [ "$(grep microcode /proc/cpuinfo | cut -d: -f2 | head -n 1)" == "0xffffffff" ]; then
-    sudo xbps-reconfigure --force linux$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')
+    sudo xbps-reconfigure --force linux"$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')"
     echo "Regenerated initramfs"
 else
     echo "Mircocode is loaded"

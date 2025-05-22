@@ -8,4 +8,4 @@ source tasks/dots/common
 resolve_deps
 
 # Task
-stow_package $(basename "$0")
+stow_package "$(basename "$0")"

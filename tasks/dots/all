@@ -10,13 +10,19 @@ exclude=(
 deps=()
 while IFS= read -r file; do
     base_name="$(basename "$file")"
-    if [[ ! " ${exclude[@]} " =~ " $base_name " ]]; then
+    if [[ ! " ${exclude[*]} " =~ $base_name ]]; then
         deps+=("dots/$base_name")
     fi
 done < <(find tasks/dots -maxdepth 1 -type f)
 
 source tasks/common
-resolve_deps
+
+echo "Running these dotfile tasks:"
+printf "%s\n" "${deps[@]##*/}"
+
+if ! confirm "Run all dotfile tasks?" "N"; then
+    exit 1
+fi
 
 # Task
-echo "${deps[@]}"
+resolve_deps

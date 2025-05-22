@@ -1,7 +1,28 @@
 #!/usr/bin/env bash
 
+usage() {
+    echo "Usage: $0 [OPTION] task"
+    echo -e "\n[ARGS]"
+    echo "    task         Name of the task to run. All tasks should be placed in ./tasks/ directory"
+    echo "                 Only one task can be specified"
+    echo -e "\n[OPTIONS]"
+    echo "    -h, --help    Show this message"
+}
+
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+    -h | --help)
+        usage
+        exit 0
+        ;;
+    *)
+        break
+        ;;
+    esac
+done
+
 if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <task_name>"
+    usage
     exit 1
 fi
 
@@ -12,9 +33,8 @@ GREEN="\033[0;32m"
 RESET="\033[0m"
 
 if [ -f "$TASK_SCRIPT" ] && [ -x "$TASK_SCRIPT" ]; then
-    "$TASK_SCRIPT"
 
-    if [ $? -ne 0 ]; then
+    if ! "$TASK_SCRIPT"; then
         echo -e "Task '$TASK_NAME' failed\n"
         exit 1
     fi

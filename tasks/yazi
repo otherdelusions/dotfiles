@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+deps=(
+    bash
+)
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing yazi ffmpeg 7zip ouch jq fd ripgred ImageMagick poppler wl-clipboard exiftool mediainfo
+
+ya pack -a ndtoan96/ouch
+ya pack -a Rolv-Apneseth/starship
+ya pack -a boydaihungst/mediainfo

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+deps=(
+    fonts
+)
+
+source tasks/common
+resolve_deps
+
+# Task
+repo="repository=https://github.com/index-0/librewolf-void/releases/latest/download/"
+if grep -rwxq "$repo" /etc/xbps.d/; then
+    echo "librewolf repository found"
+else
+    cat <<EOF | sudo tee "/etc/xbps.d/20-librewolf.conf" >/dev/null
+$repo
+EOF
+fi
+
+sudo xbps-install -S
+
+install_if_missing librewolf

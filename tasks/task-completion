@@ -8,9 +8,9 @@ resolve_deps
 # Task
 install_if_missing bash-completion
 
-mkdir -p $HOME/.local/share/bash-completion/completions
+mkdir -p "$HOME"/.local/share/bash-completion/completions
 
-cat <<'EOF' >$HOME/.local/share/bash-completion/completions/dotask
+cat <<'EOF' >"$HOME"/.local/share/bash-completion/completions/dotask
 #!/bin/bash
 
 _dotask_completion() {

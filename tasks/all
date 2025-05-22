@@ -3,23 +3,25 @@
 exclude=(
     "$(basename "$0")"
     "common"
+    "template"
 )
 
 deps=()
 while IFS= read -r file; do
     base_name="$(basename "$file")"
-    if [[ ! " ${exclude[@]} " =~ " $base_name " ]]; then
+    if [[ ! " ${exclude[*]} " =~ $base_name ]]; then
         deps+=("$base_name")
     fi
 done < <(find tasks -maxdepth 1 -type f)
 
 source tasks/common
 
+echo "Running these tasks:"
+printf "%s\n" "${deps[@]##*/}"
+
 if ! confirm "Running all tasks is dangerous. Do you want to continue?" "N"; then
     exit 1
 fi
 
-resolve_deps
-
 # Task
-echo "${deps[@]}"
+resolve_deps

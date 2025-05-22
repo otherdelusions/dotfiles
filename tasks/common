@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cleanup() {
-    echo "Exiting..."
+    echo "Stopping task..."
     exit 1
 }
 
@@ -25,8 +25,7 @@ resolve_deps() {
         fi
 
         echo -e "Running dependency task '$d' of task '$(basename "${BASH_SOURCE[1]}")'\n"
-        ./dotask "$d"
-        if [ $? -ne 0 ]; then
+        if ! ./dotask "$d"; then
             echo "Dependency task '$d' failed. Stopping further tasks"
             exit 1
         fi
@@ -60,7 +59,7 @@ check_var() {
 }
 
 check_service() {
-    if sudo sv status $1 &>/dev/null; then
+    if sudo sv status "$1" &>/dev/null; then
         echo "Service '$1' is enabled"
         return 0
     else
@@ -74,23 +73,23 @@ enable_service() {
     local max_att=5
     local att=0
 
-    if [ ! -d $service_dir ]; then
+    if [ ! -d "$service_dir" ]; then
         echo "Service '$1' does not exist"
         exit 1
     fi
 
-    if sudo sv status $1 &>/dev/null; then
+    if sudo sv status "$1" &>/dev/null; then
         echo "Service '$1' is already enabled"
         return 0
     fi
 
-    sudo ln -s $service_dir /var/service
+    sudo ln -s "$service_dir" /var/service
     echo "Symlinked '$1' service directory"
 
     while [ $att -lt $max_att ]; do
         echo "Checking $1 status. Attempt $((att + 1)) of $max_att"
         sleep 2
-        if check_service $1; then
+        if check_service "$1" >/dev/null; then
             echo "Service '$1' has started successfully"
             return 0
         fi
@@ -119,10 +118,10 @@ confirm() {
     local prompt="${1:-Continue?}"
     while true; do
         if $default_no; then
-            read -p "${prompt} (y/N): " answer
+            read -rp "${prompt} (y/N): " answer
             answer=${answer:-n}
         else
-            read -p "${prompt} (Y/n): " answer
+            read -rp "${prompt} (Y/n): " answer
             answer=${answer:-y}
         fi
 
