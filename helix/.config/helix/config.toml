@@ -1,4 +1,5 @@
 theme = "carbonfox"
+# theme = "ayu_evolve"
 
 [editor]
 line-number = "relative"

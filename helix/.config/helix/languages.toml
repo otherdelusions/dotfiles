@@ -39,7 +39,7 @@ command = "mdpls"
 name = "markdown"
 language-servers = ["mdpls", "marksman", "markdown-oxide"]
 auto-format = true
-formatter = { command = 'deno', args = ["fmt", "-", "--ext", "md"] }
+formatter = { command = 'prettier', args = ["--parser", "markdown"] }
 
 [[language]]
 name = "yaml"
