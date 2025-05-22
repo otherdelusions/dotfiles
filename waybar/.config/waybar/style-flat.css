@@ -1,0 +1,106 @@
+@import "carbonfox.css";
+
+* {
+  border: none;
+  font-family: "EnvyCodeR Nerd Font";
+  font-weight: 400;
+  font-size: 16px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+/* TOP MODULES */
+.modules-left {
+  padding: 5px 0 0 0;
+}
+
+/* clock */
+#clock {
+  background-color: transparent;
+  color: @text;
+}
+
+#clock:not(.date) {
+  padding: 4px 0 0 0;
+}
+
+#clock.date {
+  padding: 0 0 4px 0;
+}
+
+/* workspaces */
+#workspaces button {
+  all: initial;
+  padding: 0 4px 0 0;
+  margin: 0px;
+  color: @gray;
+  background-color: transparent;
+}
+
+#workspaces button:hover {
+  color: @text;
+}
+
+#workspaces button.active {
+  color: @text;
+  background-color: transparent;
+}
+
+#workspaces button:not(.empty):not(.active) {
+  color: @dim-foreground;
+}
+
+/* BOTTOM MODULES */
+
+/* media control */
+#custom-media {
+  color: @bright-grey;
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 0px;
+  padding: 0 0 4px 0;
+  margin: 4px 2px;
+}
+
+/* tray */
+#tray {
+  color: @text;
+  background-color: transparent;
+  padding: 5px 0px;
+  margin: 4px 5px 4px 5px;
+}
+
+/* pulseaudio */
+#pulseaudio.microphone.source-muted,
+#pulseaudio.muted {
+  background-color: transparent;
+}
+
+#pulseaudio:not(.muted),
+#pulseaudio.microphone:not(.source-muted) {
+  color: @text;
+}
+
+#pulseaudio.microphone {
+  margin: 4px 5px;
+}
+
+#pulseaudio {
+  background-color: transparent;
+  padding: 5px 0;
+  margin: 4px 5px;
+}
+
+/* battery and network */
+#battery:not(.critical),
+#network {
+  color: @text;
+  background-color: transparent;
+  padding: 4px 0;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}

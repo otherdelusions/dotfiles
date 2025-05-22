@@ -1,0 +1,125 @@
+@import "chicago95.css";
+
+* {
+  border: none;
+  font-family: "Iosevka Nerd Font";
+  font-weight: 300;
+  font-size: 14px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+/* TOP MODULES */
+
+/* workspaces */
+#workspaces button {
+  all: initial;
+  padding: 6px 10px;
+  margin: 0px;
+  color: @foreground;
+  background-color: @bright-black;
+}
+
+#workspaces button:hover {
+  color: @bright-white;
+}
+
+#workspaces button.active {
+  color: @black;
+  background-color: @red;
+}
+
+#workspaces button:not(.empty):not(.active) {
+  background-color: @yellow;
+}
+
+/* clock */
+#clock {
+  background-color: transparent;
+  color: @foreground;
+}
+
+#clock:not(.date) {
+  padding: 8px 0;
+}
+
+#clock.date {
+  padding: 8px 0;
+  background-color: @white;
+  color: black;
+}
+
+/* media control */
+#custom-media {
+  color: @bright-grey;
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 0px;
+  padding: 4px 0;
+}
+
+/* BOTTOM MODULES */
+
+/* tray */
+#tray {
+  color: @foreground;
+  background-color: transparent;
+  padding: 0;
+}
+
+/* pulseaudio */
+#pulseaudio.microphone.source-muted,
+#pulseaudio.muted {
+  color: @foreground;
+}
+
+#pulseaudio:not(.muted),
+#pulseaudio.microphone:not(.source-muted) {
+  color: @bright-white;
+}
+
+#pulseaudio.microphone {
+  padding: 8px 0;
+  margin: 0 3px 0 0;
+}
+
+#pulseaudio:not(.microphone) {
+  padding: 0 0 8px 0;
+}
+
+#pulseaudio {
+  background-color: transparent;
+}
+
+/* divider */
+#custom-div {
+  padding: 8px 0;
+}
+
+/* idle inhibitor */
+#idle_inhibitor {
+  margin: 0 5px 0 0;
+}
+
+/* cpu */
+#cpu {
+  padding: 24px 0 8px 0;
+}
+
+/* temperature */
+#temperature {
+  padding: 8px 0;
+}
+
+/* battery */
+#battery {
+  padding: 16px 0;
+  background-color: @white;
+  color: @black;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @red;
+}

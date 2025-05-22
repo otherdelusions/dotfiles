@@ -2,22 +2,33 @@
   "reload_style_on_change": true,
   "layer": "top",
   "position": "left",
+  "no-center": "true",
+
   "margin-top": 0,
   "margin-right": 0,
   "margin-left": 0,
-  "modules-left": ["hyprland/workspaces", "clock", "clock#date"],
-  "modules-center": ["custom/media"],
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "clock",
+    "clock#date",
+    "custom/media"
+  ],
+
   "modules-right": [
     "tray",
     "pulseaudio#microphone",
     "pulseaudio",
+    "custom/div",
     "network",
+    "idle_inhibitor",
+    "custom/div",
+    "memory",
+    "cpu",
+    "temperature",
     "battery"
   ],
-  "custom/void": {
-    "format": "  ",
-    "tooltip": false
-  },
+
   "hyprland/workspaces": {
     "format": "{icon}",
     "tooltip": false,
@@ -28,9 +39,7 @@
       "2": [],
       "3": [],
       "4": [],
-      "5": [],
-      "6": [],
-      "7": []
+      "5": []
     },
     "format-icons": {
       "1": "1",
@@ -38,75 +47,120 @@
       "3": "3",
       "4": "4",
       "5": "5",
-      "6": "6",
-      "7": "7",
-      "special": "s"
+      "special": "S"
     }
   },
+
   "tray": {
-    // "icon-size": 22,
     "spacing": 10
   },
+
+  "memory": {
+    "rotate": 90,
+    "interval": 10,
+    "format": "{used:0.1f}G/{total:0.1f}G "
+  },
+
+  "cpu": {
+    "rotate": 90,
+    "interval": 10,
+    "format": "{usage}% ",
+    "max-length": 5
+  },
+
+  "temperature": {
+    "rotate": 90,
+    "critical-threshold": 80,
+    "format-critical": " {temperatureC}°",
+    "format": "{icon} {temperatureC}°",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    }
+  },
+
   "clock": {
-    //"format": "<span color='#dde1e6'>  </span>{:%H:%M <span color='#dde1e6'>|</span><span color='#dde1e6'>   </span>%d.%m.%y}",
-    //"format": "  {:%H:%M |   %d.%m.%y}",
-    "format": " \n{:%H\n%M}",
+    "rotate": 90,
+    "format": "{:%H:%M}",
     "tooltip": false
   },
+
   "clock#date": {
-    "format": " \n{:%d\n%m}",
+    "rotate": 90,
+    "format": "{:%d %b %Y}",
     "tooltip": false
   },
+
+  "custom/div": {
+    "rotate": 90,
+    "format": "|"
+  },
+
   "backlight": {
     "device": "intel_backlight",
     "tooltip": false,
     "format": "<span color='#3ddbd9'>{icon}</span> {percent}%",
     "format-icons": ["", "", "", "", "", "", "", "", ""]
   },
+
   "custom/media": {
+    "rotate": 90,
     "format": "{}",
     "max-length": 25,
     "escape": true,
-    "rotate": 90,
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next && playerctl play",
     "on-click-middle": "playerctl shuffle toggle",
-    "exec": "$HOME/.config/waybar/playerwatcher.sh"
+    "exec": "$HOME/.config/waybar/follow_player.sh"
   },
+
   "pulseaudio": {
+    "rotate": 90,
     "justify": "center",
-    "format": "{icon}\n{volume}%",
-    "format-muted": "󰖁\n{volume}%",
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 {volume}%",
     "tooltip": false,
     "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
     "format-icons": {
-      "headphone": "󰋋",
-      "default": ["󰕿", "󰕿", "󰖀", "󰖀", "󰖀", "󰕾", "󰕾", "󰕾"]
+      "default": ["󰕿", "󰖀", "󰕾"]
     }
   },
+
   "pulseaudio#microphone": {
     "format": "{format_source}",
     "format-source": "󰍬",
     "format-source-muted": "󰍭",
     "tooltip": false,
     "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle"
-    //"on-scroll-up": "wpctl set-volume -l 1.7 @DEFAULT_SOURCE@ 5%+",
-    //"on-scroll-down": "wpctl set-volume -l 1.7 @DEFAULT_SOURCE@ 5%-",
   },
+
   "network": {
     "format": "{ifname}",
     "format-wifi": "󰤨 ",
-    "format-ethernet": "{ipaddr}/{cidr} 󰈀",
+    "format-ethernet": "󰈀",
     "format-disconnected": "󰤯 ",
     "format-disabled": "󰤭 ",
     "tooltip": false,
-    "on-click": "sh $HOME/.config/rofi/wifimenu.sh"
+    "on-click": "$HOME/.config/rofi/wifimenu.sh"
   },
+
   "battery": {
-    "justify": "center",
-    "format": "{icon}\n{capacity}%",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "format-charging": " 󰂄\n{capacity}%",
+    "rotate": 90,
+    "states": {
+      "full": 100,
+      "normal": 98,
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}% ({time})",
+    "format-time": "{H}:{M}",
+    "format-full": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
     "tooltip": false
   }
 }

@@ -1,0 +1,135 @@
+@import "carbonfox.css";
+
+* {
+  border: none;
+  font-family: "Iosevka Nerd Font";
+  font-weight: 400;
+  font-size: 13px;
+  min-width: 25px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+/* TOP MODULES */
+
+/* workspaces */
+#workspaces button {
+  all: initial;
+  padding: 8px 0px;
+  margin: 4px 5px;
+  color: @dim-foreground;
+  background-color: @bright-black;
+  box-shadow:
+    inset 2px 2px rgba(255, 255, 255, 0.2),
+    inset -2px -2px rgba(0, 0, 0, 0.4);
+}
+
+#workspaces button:hover {
+  color: @blue;
+}
+
+#workspaces button:not(.empty):not(.active) {
+  background-color: @dark-magenta;
+  color: @background;
+  box-shadow:
+    inset 2px 2px rgba(255, 255, 255, 0.2),
+    inset -2px -2px rgba(0, 0, 0, 0.4);
+}
+
+#workspaces button.active {
+  background-color: @black;
+  box-shadow:
+    inset 2px 2px rgba(0, 0, 0, 0.8),
+    inset -2px -2px rgba(255, 255, 255, 0.1);
+}
+
+#workspaces button.active:not(.empty) {
+  background-color: rgba(44, 32, 60, 1);
+  box-shadow:
+    inset 2px 2px rgba(0, 0, 0, 0.8),
+    inset -2px -2px rgba(255, 255, 255, 0.1);
+}
+
+/* clock */
+#clock {
+  background-color: transparent;
+  color: @white;
+  padding: 10px 0 0 0;
+}
+
+/* media control */
+#custom-media {
+  color: @bright-gray;
+  background-color: transparent;
+  border: 1px solid;
+  border-radius: 0px;
+  padding: 8px 3px;
+  margin: 4px 5px 4px 5px;
+}
+
+/* BOTTOM MODULES */
+
+/* tray */
+#tray {
+  color: @gray;
+  background-color: transparent;
+  padding: 5px 0px;
+  margin: 4px 5px 4px 5px;
+}
+
+/* pulseaudio */
+#pulseaudio.microphone.source-muted,
+#pulseaudio.muted {
+  background-color: @black;
+  box-shadow:
+    inset 2px 2px rgba(0, 0, 0, 0.8),
+    inset -2px -2px rgba(255, 255, 255, 0.1);
+}
+
+#pulseaudio:not(.muted),
+#pulseaudio.microphone:not(.source-muted) {
+  color: @foreground;
+  background-color: @gray;
+  box-shadow:
+    inset 2px 2px 1px @bright-gray,
+    inset -2px -2px 1px black;
+}
+
+#pulseaudio.microphone {
+  padding: 8px 0px;
+  margin: 4px 5px;
+}
+
+#pulseaudio {
+  padding: 5px 0;
+  margin: 4px 5px;
+}
+
+/* battery and network */
+#battery:not(.critical),
+#network {
+  color: @text;
+  background-color: transparent;
+  padding: 7px;
+}
+
+#battery.charging {
+  color: @green;
+}
+
+#battery.critical:not(.charging) {
+  color: @red;
+}
+
+/* EXTRA */
+
+/* modules background */
+.modules-right,
+#workspaces {
+  background-color: @black;
+  box-shadow:
+    inset 2px 2px rgba(255, 255, 255, 0.3),
+    inset -2px -2px rgba(0, 0, 0, 0.4);
+}
