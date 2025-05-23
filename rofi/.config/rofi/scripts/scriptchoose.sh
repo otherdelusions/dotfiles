@@ -1,15 +1,14 @@
-# Options
+#!/usr/bin/env bash
 # web='󰖟'
 # rec=''
 web='Web Search'
 rec='Screen Record'
+wal='Wallpaper Switch'
 
-# Pass variables to rofi dmenu
 run_rofi() {
-    echo -e "$web\n$rec" | rofi -dmenu -no-custom -p "scripts" -theme ~/.config/rofi/launcher.rasi
+    echo -e "$web\n$rec\n$wal" | rofi -dmenu -no-custom -p "scripts" -theme ~/.config/rofi/launcher.rasi
 }
 
-# Actions
 chosen="$(run_rofi)"
 case ${chosen} in
 "$web")
@@ -17,5 +16,8 @@ case ${chosen} in
     ;;
 "$rec")
     rofi -show videorecord -modes "videorecord" -theme ~/.config/rofi/launcher.rasi
+    ;;
+"$wal")
+    rofi -show wallswitch -modes "wallswitch" -theme ~/.config/rofi/wallswitch.rasi
     ;;
 esac
