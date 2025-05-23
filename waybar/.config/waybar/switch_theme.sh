@@ -58,7 +58,7 @@ fi
 
 theme=${themes[$next_index]}
 
-killall waybar 2>/dev/null || true
+killall -q waybar || true
 waybar -l off -c "$(dirname "$0")/config-$theme.jsonc" -s "$(dirname "$0")/style-$theme.css" >/dev/null &
 disown
 
