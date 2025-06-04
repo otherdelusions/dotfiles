@@ -6,8 +6,10 @@ lock=''
 suspend=''
 logout='󰍃'
 
+theme=tui
+
 run_rofi() {
-    echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi -dmenu -theme ~/.config/rofi/powermenu.rasi
+    echo -e "$lock\n$suspend\n$logout\n$reboot\n$shutdown" | rofi -dmenu -sync -theme ~/.config/rofi/themes/$theme/powermenu.rasi
 }
 
 chosen="$(run_rofi)"

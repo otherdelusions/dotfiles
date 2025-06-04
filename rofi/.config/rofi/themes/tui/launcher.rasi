@@ -7,7 +7,7 @@ configuration {
     window-format: "{t}";
 }
 
-@theme "carbonfox.rasi"
+@theme "~/.config/rofi/themes/assets/carbonfox.rasi"
 
 /* MAIN WINDOW */
 window {
@@ -31,6 +31,7 @@ mainbox {
 inputbar {
     enabled: true;
     margin: 6px;
+    padding: 6px 0px;
     background-color: transparent;
     children: [ "prompt", "entry" ];
 }
@@ -38,47 +39,40 @@ inputbar {
 prompt {
     enabled: true;
     padding: 10px;
-    background-color: @grey;
-    border: 2px 0px 0px 2px;
-    border-color: @bright-grey;
-    text-color: @foreground;    
+    background-color: #1d1d1d;
+    border: 1px;
+    border-color: #2C2C2C;
+    text-color: @dim-foreground;    
 }
 
 entry {
     enabled: true;
     padding: 10px;
+    margin: 0 0 0 6px;
     border: 1px;
-    border-color: black;
-    background-color: white;
-    text-color: @black;
+    border-color: @magenta;
+    background-color: #1D1D1D;
+    text-color: @dim-foreground;
     cursor: text;
     placeholder: "search";
-    placeholder-color: @bright-grey;
+    placeholder-color: @bright-black;
 }
 
 /* LIST VIEW */
 listview {
     enabled: true;
     columns: 1;
-    lines: 10;
+    lines: 6;
     cycle: true;
     dynamic: false;
-    scrollbar: true;
+    scrollbar: false;
     layout: vertical;
     reverse: false;
     fixed-height: false;
     fixed-columns: false;
+    spacing: 10px;
     
     margin: 0px 6px 6px 6px;
-    border: 0px solid;
-    border-color: @cyan;
-    background-color: transparent;
-    text-color: @foreground;
-}
-
-scrollbar {
-    handle-width: 5px;
-    handle-color: @bright-grey;
     background-color: transparent;
 }
 
@@ -86,12 +80,14 @@ scrollbar {
 element {
     enabled: true;
     padding: 4px 10px;
-    background-color: transparent;
-    text-color: @foreground;
+    background-color: #1d1d1d;
+    border: 1px;
+    border-color: #2C2C2C;
+    text-color: @dim-foreground;    
 }
 
 element active {
-    background-color: @grey;
+    background-color: #1d1d1d;
     text-color: @foreground;
 }
 
@@ -100,13 +96,14 @@ element selected.normal {
 }
 
 element selected.active {
-    background-color: @bright-grey;
-    text-color: black;
+    background-color: @black;
+    text-color: @magenta;
 }
 
 element-icon {
     background-color: transparent;
     size: 36px;
+    padding: 5px 5px 5px 0;
 }
 
 element-text {
@@ -126,7 +123,7 @@ message {
 
 textbox {
     padding: 10px;
-    background-color: @green;
+    background-color: @background;
     text-color: @foreground;
     vertical-align: 0.5;
     horizontal-align: 0.0;

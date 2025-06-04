@@ -1,0 +1,74 @@
+configuration {
+    show-icons:                 false;
+}
+
+@theme "~/.config/rofi/themes/assets/carbonfox.rasi"
+
+/* MAIN WINDOW */
+window {
+    transparency:                "real";
+    location:                    east;
+    anchor:                      east;
+    width:                       100px;
+    x-offset:                    -6px;
+    y-offset:                    0px;
+    border: 2px 0px 0px 2px;
+    border-color: @bright-gray;
+    background-color: @black;
+
+    enabled:                     true;
+    cursor:                      "default";
+}
+
+/* MAIN BOX */
+mainbox {
+    enabled:                     true;
+    spacing:                     10px;
+    margin:                      6px;
+    background-color:            transparent;
+    children:                    [ "listview" ];
+}
+
+/* LIST VIEW */
+listview {
+    enabled:                     true;
+    columns:                     1;
+    lines:                       5;
+    cycle:                       true;
+    dynamic:                     true;
+    scrollbar:                   false;
+    layout:                      vertical;
+    reverse:                     false;
+    fixed-height:                true;
+    fixed-columns:               true;
+    
+    spacing:                     6px;
+    background-color:            transparent;
+    cursor:                      "default";
+}
+
+/* ELEMENTS */
+element {
+    enabled:                     true;
+    padding:                     10px;
+    border: 3px 0px 0px 3px;
+    border-color: @bright-gray;
+    background-color:            @bright-black;
+    text-color:                  @foreground;
+}
+
+element-text {
+    font:                        "Iosevka Nerd Font Mono bold 42";
+    background-color:            transparent;
+    text-color:                  inherit;
+    cursor:                      inherit;
+    vertical-align:              0.5;
+    horizontal-align:            0.5;
+}
+
+element selected.normal {
+    border: 0px 3px 3px 0px;
+    border-color: @bright-black;
+    background-color:            #383838;
+    text-color:                  @white;
+}

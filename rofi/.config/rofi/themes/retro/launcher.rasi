@@ -7,14 +7,14 @@ configuration {
     window-format: "{t}";
 }
 
-@theme "carbonfox.rasi"
+@theme "~/.config/rofi/themes/assets/carbonfox.rasi"
 
 /* MAIN WINDOW */
 window {
     transparency: "real";
     location: center;
     anchor: center;
-    width: 600px;
+    width: 400px;
 
     enabled: true;
     cursor: "default";
@@ -38,9 +38,9 @@ inputbar {
 prompt {
     enabled: true;
     padding: 10px;
-    background-color: @grey;
+    background-color: @bright-black;
     border: 2px 0px 0px 2px;
-    border-color: @bright-grey;
+    border-color: @bright-gray;
     text-color: @foreground;    
 }
 
@@ -53,14 +53,14 @@ entry {
     text-color: @black;
     cursor: text;
     placeholder: "search";
-    placeholder-color: @bright-grey;
+    placeholder-color: @bright-gray;
 }
 
 /* LIST VIEW */
 listview {
     enabled: true;
-    columns: 3;
-    lines: 3;
+    columns: 1;
+    lines: 10;
     cycle: true;
     dynamic: false;
     scrollbar: true;
@@ -78,20 +78,20 @@ listview {
 
 scrollbar {
     handle-width: 5px;
-    handle-color: @bright-grey;
+    handle-color: @bright-gray;
     background-color: transparent;
 }
 
 /* ELEMENTS */
 element {
-    orientation: vertical;
     enabled: true;
+    padding: 4px 10px;
     background-color: transparent;
     text-color: @foreground;
 }
 
 element active {
-    background-color: @grey;
+    background-color: @bright-black;
     text-color: @foreground;
 }
 
@@ -100,13 +100,13 @@ element selected.normal {
 }
 
 element selected.active {
-    background-color: @bright-grey;
+    background-color: @bright-gray;
     text-color: black;
 }
 
 element-icon {
     background-color: transparent;
-    size: 128px;
+    size: 36px;
 }
 
 element-text {
@@ -114,7 +114,7 @@ element-text {
     text-color: inherit;
     highlight: inherit;
     vertical-align: 0.5;
-    horizontal-align: 0.5;
+    horizontal-align: 0.0;
 }
 
 /* MESSAGE */
