@@ -1,8 +1,8 @@
-[manager]
+[mgr]
 hovered = { reversed = true }
 preview_hovered = { reversed = true }
 
-find_keyword = { bg = "blue", fg = "black", bold = false, italic = true, underline = false, reversed = true }
+find_keyword = { bg = "#525252", fg = "white", italic = true }
 
 tab_active = { reversed = true }
 tab_inactive = {}
@@ -19,27 +19,30 @@ syntect_theme = "~/.config/yazi/carbonfox.tmTheme"
 
 [mode]
 normal_main = { fg = "#161616", bg = "blue", bold = true }
-normal_alt = { fg = "gray", bg = "#0C0C0C" }
+normal_alt = { fg = "#b6b8bb", bg = "#0C0C0C" }
 select_main = { fg = "#161616", bg = "green", bold = true }
-select_alt = { fg = "gray", bg = "#0C0C0C" }
+select_alt = { fg = "#b6b8bb", bg = "#0C0C0C" }
 unset_main = { fg = "#161616", bg = "magenta", bold = true }
-unset_alt = { fg = "gray", bg = "#0C0C0C" }
+unset_alt = { fg = "#b6b8bb", bg = "#0C0C0C" }
 
 [status]
 sep_left = { open = "", close = "" }
 sep_right = { open = "", close = "" }
 
-overall = { fg = "gray", bg = "#0C0C0C" }
+overall = { fg = "#b6b8bb", bg = "#0C0C0C" }
 
-progress_label = { fg = "#161616", bg = "yellow", bold = false }
+progress_label = { fg = "#161616", bg = "gray", bold = false }
 progress_normal = { fg = "#161616", bg = "yellow", bold = false }
-progress_error = { fg = "#161616", bg = "yellow", bold = false }
+progress_error = { fg = "#161616", bg = "red", bold = false }
 
-perm_type = { fg = "green" }
-perm_read = { fg = "yellow" }
-perm_write = { fg = "magenta" }
-perm_exec = { fg = "red" }
+perm_type = { fg = "lightblue" }
+perm_read = { fg = "magenta" }
+perm_write = { fg = "blue" }
+perm_exec = { fg = "magenta" }
 perm_sep = { fg = "darkgray" }
+
+[tasks]
+border = { fg = "white" }
 
 [input]
 border = { fg = "white" }
@@ -55,6 +58,6 @@ rules = [
   { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "cyan" },
   { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "lightred" },
   { name = "*", is = "orphan", fg = "white" },
-  { name = "*", is = "exec", fg = "magenta" },
-  { name = "*/", fg = "#7B7C7E" },
+  { name = "*", is = "exec", fg = "magenta", dim = true },
+  { name = "*/", fg = "blue" },
 ]

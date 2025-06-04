@@ -1,19 +1,8 @@
-[manager]
+[mgr]
 prepend_keymap = [
-  # Copy to system clipboard
-  { on = "<C-y>", run = 'plugin wl-clipboard' },
+  { on = "<C-y>", run = 'plugin wl-clipboard', desc = "Copy to clipboard" },
 
-  # Archve compress
-  # { on = [
-  #   "c",
-  #   "a",
-  # ], run = 'plugin compress', desc = "Archive selected files" },
+  { on = "C", run = "plugin ouch", desc = "Compress with ouch" },
 
-  { on = [
-    "C",
-  ], run = "plugin ouch", desc = "Compress with ouch" },
-
-  # Archive navigation
-  # { on = [ "<Right>" ], run = "plugin fuse-archive mount", desc = "Enter or Mount selected archive" },
-  # { on = [ "<Left>" ], run = "plugin fuse-archive unmount", desc = "Leave or Unmount selected archive" },
+  { on = "M", run = "plugin mount", desc = "Mount menu" },
 ]
