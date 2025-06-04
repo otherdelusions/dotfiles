@@ -1,6 +1,5 @@
 [general]
 import = ["~/.config/alacritty/themes/carbonfox.toml"]
-# import = ["~/.config/alacritty/themes/matugen.toml"]
 
 [cursor]
 style.shape = "Beam"
@@ -14,7 +13,6 @@ TERM = "alacritty"
 
 [font.normal]
 family = "Iosevka Nerd Font"
-# family = "EnvyCodeR Nerd Font"
 style = "normal"
 
 [font]
