@@ -1,9 +1,8 @@
 @define-color background #161616;
+@define-color bright-background #505050;
 @define-color foreground #f2f4f8;
 @define-color dim-foreground #b6b8bb;
 @define-color bright-foreground #f9fbff;
-
-@define-color text #f2f4f8;
 
 @define-color black #282828;
 @define-color red #ee5396;

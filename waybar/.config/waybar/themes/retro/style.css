@@ -1,4 +1,4 @@
-@import "carbonfox.css";
+@import "../assets/carbonfox.css";
 
 * {
   border: none;
@@ -14,7 +14,7 @@ window#waybar {
 
 /* TOP MODULES */
 
-/* workspaces */
+/* Workspaces */
 #workspaces button {
   all: initial;
   padding: 8px 0px;
@@ -52,14 +52,14 @@ window#waybar {
     inset -2px -2px rgba(255, 255, 255, 0.1);
 }
 
-/* clock */
+/* Clock */
 #clock {
   background-color: transparent;
   color: @white;
   padding: 10px 0 0 0;
 }
 
-/* media control */
+/* Media Control */
 #custom-media {
   color: @bright-gray;
   background-color: transparent;
@@ -71,7 +71,7 @@ window#waybar {
 
 /* BOTTOM MODULES */
 
-/* tray */
+/* Tray */
 #tray {
   color: @gray;
   background-color: transparent;
@@ -79,7 +79,7 @@ window#waybar {
   margin: 4px 5px 4px 5px;
 }
 
-/* pulseaudio */
+/* PulseAudio */
 #pulseaudio.microphone.source-muted,
 #pulseaudio.muted {
   background-color: @black;
@@ -107,10 +107,10 @@ window#waybar {
   margin: 4px 5px;
 }
 
-/* battery and network */
+/* Battery and Network */
 #battery:not(.critical),
 #network {
-  color: @text;
+  color: @foreground;
   background-color: transparent;
   padding: 7px;
 }
@@ -125,7 +125,6 @@ window#waybar {
 
 /* EXTRA */
 
-/* modules background */
 .modules-right,
 #workspaces {
   background-color: @black;

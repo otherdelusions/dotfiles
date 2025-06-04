@@ -1,0 +1,159 @@
+{
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "left",
+  "no-center": "true",
+
+  "margin-top": 0,
+  "margin-right": 0,
+  "margin-left": 0,
+
+  "modules-left": [
+    "hyprland/workspaces",
+    "clock",
+    "clock#date",
+    "custom/media"
+  ],
+
+  "modules-right": [
+    "tray",
+    "pulseaudio#microphone",
+    "pulseaudio",
+    "network",
+    "idle_inhibitor",
+    "memory",
+    "cpu",
+    "custom/div",
+    "temperature",
+    "battery"
+  ],
+
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "tooltip": false,
+    "all-outputs": true,
+    "show-special": true,
+    "persistent-workspaces": {
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    },
+    "format-icons": {
+      "1": "1",
+      "2": "2",
+      "3": "3",
+      "4": "4",
+      "5": "5",
+      "special": "S"
+    }
+  },
+
+  "tray": {
+    "expand": true,
+    "spacing": 10
+  },
+
+  "memory": {
+    "justify": "center",
+    "interval": 10,
+    "format": "{used:0.1f}G\n "
+  },
+
+  "cpu": {
+    "justify": "center",
+    "interval": 10,
+    "format": " \n{usage}%"
+  },
+
+  "temperature": {
+    "justify": "center",
+    "critical-threshold": 80,
+    "format-critical": "\n{temperatureC}°",
+    "format": "{icon}\n{temperatureC}°",
+    "format-icons": ["", "", "", "", ""]
+  },
+
+  "idle_inhibitor": {
+    "justify": "center",
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "󰅶",
+      "deactivated": "󰾪"
+    }
+  },
+
+  "clock": {
+    "justify": "center",
+    "format": " \n{:%H\n%M}",
+    "tooltip": false
+  },
+
+  "clock#date": {
+    "justify": "center",
+    "format": " \n{:%d\n%b}",
+    "tooltip": false
+  },
+
+  "custom/div": {
+    "rotate": 90,
+    "format": "|"
+  },
+
+  "custom/media": {
+    "rotate": 90,
+    "format": "{}",
+    "max-length": 25,
+    "escape": true,
+    "on-click": "playerctl play-pause",
+    "on-click-right": "playerctl next && playerctl play",
+    "on-click-middle": "playerctl shuffle toggle",
+    "exec": "$HOME/.config/waybar/follow_player.sh"
+  },
+
+  "pulseaudio": {
+    "justify": "center",
+    "format": "{icon}\n{volume}%",
+    "format-muted": "󰝟\n{volume}%",
+    "tooltip": false,
+    "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    }
+  },
+
+  "pulseaudio#microphone": {
+    "justify": "center",
+    "format": "{format_source}",
+    "format-source": "󰍬",
+    "format-source-muted": "󰍭",
+    "tooltip": false,
+    "on-click": "wpctl set-mute @DEFAULT_SOURCE@ toggle"
+  },
+
+  "network": {
+    "format": "{ifname}",
+    "format-wifi": "󰤨 ",
+    "format-ethernet": "󰈀",
+    "format-disconnected": "󰤯 ",
+    "format-disabled": "󰤭 ",
+    "tooltip": false,
+    "on-click": "$HOME/.config/rofi/wifimenu.sh"
+  },
+
+  "battery": {
+    "rotate": 90,
+    "states": {
+      "full": 100,
+      "normal": 98,
+      "warning": 20,
+      "critical": 10
+    },
+    "format": "{icon} {capacity}% ({time})",
+    "format-time": "{H}:{M}",
+    "format-full": "{icon} {capacity}%",
+    "format-icons": ["", "", "", "", ""],
+    "tooltip": false
+  }
+}

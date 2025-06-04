@@ -17,5 +17,5 @@ fi
 
 theme=$(<"$namefile")
 
-waybar -l off -c "$HOME/.config/waybar/config-$theme.jsonc" -s "$HOME/.config/waybar/style-$theme.css" &
+waybar -l off -c "$HOME/.config/waybar/themes/$theme/config.jsonc" -s "$HOME/.config/waybar/themes/$theme/style.css" &
 disown

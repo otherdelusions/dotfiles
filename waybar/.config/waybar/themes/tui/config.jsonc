@@ -19,12 +19,12 @@
     "tray",
     "pulseaudio#microphone",
     "pulseaudio",
-    "custom/div",
     "network",
     "idle_inhibitor",
-    "custom/div",
     "memory",
+    "custom/div",
     "cpu",
+    "custom/div",
     "temperature",
     "battery"
   ],
@@ -52,31 +52,32 @@
   },
 
   "tray": {
+    "expand": true,
     "spacing": 10
   },
 
   "memory": {
-    "rotate": 90,
+    "justify": "center",
     "interval": 10,
-    "format": "{used:0.1f}G/{total:0.1f}G "
+    "format": "{used:0.1f}G\n "
   },
 
   "cpu": {
-    "rotate": 90,
+    "justify": "center",
     "interval": 10,
-    "format": "{usage}% ",
-    "max-length": 5
+    "format": " \n{usage}%"
   },
 
   "temperature": {
-    "rotate": 90,
+    "justify": "center",
     "critical-threshold": 80,
-    "format-critical": " {temperatureC}°",
-    "format": "{icon} {temperatureC}°",
+    "format-critical": "\n{temperatureC}°",
+    "format": "{icon}\n{temperatureC}°",
     "format-icons": ["", "", "", "", ""]
   },
 
   "idle_inhibitor": {
+    "justify": "center",
     "format": "{icon}",
     "format-icons": {
       "activated": "󰅶",
@@ -85,33 +86,26 @@
   },
 
   "clock": {
-    "rotate": 90,
-    "format": "{:%H:%M}",
+    "justify": "center",
+    "format": " \n{:%H\n%M}",
     "tooltip": false
   },
 
   "clock#date": {
-    "rotate": 90,
-    "format": "{:%d %b %Y}",
+    "justify": "center",
+    "format": " \n{:%d\n%b}",
     "tooltip": false
   },
 
   "custom/div": {
     "rotate": 90,
-    "format": "|"
-  },
-
-  "backlight": {
-    "device": "intel_backlight",
-    "tooltip": false,
-    "format": "<span color='#3ddbd9'>{icon}</span> {percent}%",
-    "format-icons": ["", "", "", "", "", "", "", "", ""]
+    "format": "│"
   },
 
   "custom/media": {
     "rotate": 90,
     "format": "{}",
-    "max-length": 25,
+    "max-length": 40,
     "escape": true,
     "on-click": "playerctl play-pause",
     "on-click-right": "playerctl next && playerctl play",
@@ -120,10 +114,9 @@
   },
 
   "pulseaudio": {
-    "rotate": 90,
     "justify": "center",
-    "format": "{icon} {volume}%",
-    "format-muted": "󰝟 {volume}%",
+    "format": "{icon}\n{volume}%",
+    "format-muted": "󰝟\n{volume}%",
     "tooltip": false,
     "on-click": "wpctl set-mute @DEFAULT_SINK@ toggle",
     "format-icons": {
@@ -132,6 +125,7 @@
   },
 
   "pulseaudio#microphone": {
+    "justify": "center",
     "format": "{format_source}",
     "format-source": "󰍬",
     "format-source-muted": "󰍭",
@@ -160,6 +154,7 @@
     "format": "{icon} {capacity}% ({time})",
     "format-time": "{H}:{M}",
     "format-full": "{icon} {capacity}%",
+    "format-charging": "{icon} {capacity}%",
     "format-icons": ["", "", "", "", ""],
     "tooltip": false
   }

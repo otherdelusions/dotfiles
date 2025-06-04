@@ -1,0 +1,158 @@
+@import "../assets/carbonfox.css";
+
+* {
+  border: none;
+  font-family: "Iosevka Nerd Font";
+  font-weight: 300;
+  font-size: 14px;
+  min-width: 10px;
+}
+
+window#waybar {
+  background-color: @background;
+}
+
+.modules-right,
+.modules-left {
+  padding: 6px;
+}
+
+/* TOP MODULES */
+
+/* Workspaces */
+#workspaces {
+  background-color: transparent;
+  margin: 0 0 4px 0;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 6px 10px;
+  color: @dim-foreground;
+  background-color: @gray;
+}
+
+#workspaces button.empty {
+  background-color: @black;
+  color: @bright-black;
+}
+
+#workspaces button.active {
+  color: @foreground;
+  background-color: @bright-black;
+}
+
+#workspaces button:first-child {
+  border-radius: 4px 4px 0 0;
+}
+
+#workspaces button:last-child {
+  border-radius: 0 0 4px 4px;
+}
+
+/* Clock */
+#clock {
+  background-color: @dim-foreground;
+  margin: 4px 0;
+  color: @background;
+  padding: 8px 0;
+  border-radius: 4px;
+}
+
+/* Media Control */
+#custom-media {
+  background-color: @gray;
+  color: @foreground;
+  border-radius: 4px;
+  padding: 4px 0;
+  padding: 10px 0;
+}
+
+/* BOTTOM MODULES */
+
+/* Tray */
+#tray {
+  background-color: transparent;
+  color: @foreground;
+  margin: 4px 0 8px 0;
+  border-radius: 4px;
+}
+
+/* PulseAudio */
+#pulseaudio.microphone {
+  border-radius: 4px 4px 0 0;
+}
+
+#pulseaudio:not(.microphone) {
+  padding: 0 0 6px 0;
+  border-radius: 0 0 4px 4px;
+  margin: 0 0 4px 0;
+}
+
+#pulseaudio {
+  padding: 6px 10px;
+  color: @foreground;
+  background-color: @bright-black;
+}
+
+/* Divider */
+#custom-div {
+  background-color: @gray;
+}
+
+/* Idle Inhibitor */
+#idle_inhibitor {
+  border-radius: 0 0 4px 4px;
+  padding: 0 4px 6px 0;
+  margin: 0 0 4px 0;
+  color: @foreground;
+  background-color: @bright-black;
+}
+
+/* Network */
+#network {
+  border-radius: 4px 4px 0 0;
+  padding: 6px 0 4px 0;
+  margin: 4px 0 0 0;
+  color: @foreground;
+  background-color: @bright-black;
+}
+
+/* Memory */
+#memory {
+  background-color: @gray;
+  padding: 6px 0;
+  border-radius: 4px;
+  margin: 4px 0;
+  font-size: 12px;
+}
+
+/* CPU */
+#cpu {
+  background-color: @gray;
+  padding: 10px 0 4px 0;
+  margin: 4px 0 0 0;
+  border-radius: 4px 4px 0 0;
+}
+
+/* Temperature */
+#temperature {
+  padding: 0 0 6px 0;
+  margin: 0 0 4px 0;
+  border-radius: 0 0 4px 4px;
+  background-color: @gray;
+}
+
+/* Battery */
+#battery {
+  background-color: @dim-foreground;
+  margin: 4px 0;
+  color: @background;
+  padding: 8px 0;
+  border-radius: 4px;
+}
+
+#battery.critical:not(.charging) {
+  background-color: @true-dark;
+  color: @foreground;
+}

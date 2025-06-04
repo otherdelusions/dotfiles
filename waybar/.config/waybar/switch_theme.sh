@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 themes=(
-    minimal
-    flat
     retro
+    oxocarbon
+    tui
 )
 
 usage() {
@@ -12,9 +12,14 @@ usage() {
     echo "    theme         Name of the theme you want to switch to"
     echo "                  Can be empty to cycle between all themes"
     echo -e "\n[OPTIONS]"
-    echo "    -h, --help    Show this message"
-    echo "    -l, --list    List all available themes"
+    echo "    -h, --help           Show this message"
+    echo "    -l, --list           List all available themes"
+    echo "    -L, --log            Enable logging"
+    echo "    -i, --interactive    Enable interactive mode"
 }
+
+enable_logging=false
+interactive=false
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in
@@ -26,6 +31,14 @@ while [[ "$#" -gt 0 ]]; do
         echo "Available themes:"
         printf "%s\n" "${themes[@]}"
         exit 0
+        ;;
+    -L | --log)
+        enable_logging=true
+        shift
+        ;;
+    -i | --interactive)
+        interactive=true
+        shift
         ;;
     *)
         if ! echo "${themes[@]}" | grep -owq "$1"; then
@@ -59,7 +72,15 @@ fi
 theme=${themes[$next_index]}
 
 killall -q waybar || true
-waybar -l off -c "$(dirname "$0")/config-$theme.jsonc" -s "$(dirname "$0")/style-$theme.css" >/dev/null &
+if [ "$interactive" = true ]; then
+    export GTK_DEBUG=interactive
+fi
+
+if [ "$enable_logging" = true ]; then
+    waybar -c "$(dirname "$0")/themes/$theme/config.jsonc" -s "$(dirname "$0")/themes/$theme/style.css" &
+else
+    waybar -l off -c "$(dirname "$0")/themes/$theme/config.jsonc" -s "$(dirname "$0")/themes/$theme/style.css" &>/dev/null &
+fi
 disown
 
 echo "$next_index" >"$current_theme"
