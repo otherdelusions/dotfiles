@@ -1,40 +1,58 @@
 #!/usr/bin/env bash
 
+GREEN="\033[0;32m"
+RED="\033[0;31m"
+RESET="\033[0m"
+
 cleanup() {
     echo "Stopping task..."
     exit 1
 }
 
+# Trap exit to stop execution on any interrupt signal
 trap cleanup SIGINT
 
+# Make sure user does not execute this as task or script
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
-    echo "This script cannot be executed directly"
+    echo "This script cannot be executed directly" >&2
     exit 1
 fi
 
+# resolve_deps() - Execute all tasks specified in deps array
+#
+# This function manages task dependencies by executing all tasks listed in the deps array
+# It should be called at the beginning of a task to ensure all prerequisites are met
+# Requires "deps" array to be present in task script
 resolve_deps() {
     for d in "${deps[@]}"; do
         if [[ "$d" == "$(basename "$0")" ]]; then
-            echo "Tasks dependency is the task itself. Stopping recursion"
+            echo "Tasks dependency is the task itself" >&2
             exit 1
         fi
 
         if [[ "$d" == "all" ]]; then
-            echo "Cannot have 'all' as dependency task"
+            echo "Cannot have 'all' as dependency task" >&2
             exit 1
         fi
 
-        echo -e "Running dependency task '$d' of task '$(basename "${BASH_SOURCE[1]}")'\n"
+        echo -e "${GREEN}Running dependency task '$d' of task '$(basename "${BASH_SOURCE[1]}")'${RESET}\n"
         if ! ./dotask "$d"; then
-            echo "Dependency task '$d' failed. Stopping further tasks"
+            echo "${RED}Dependency task '$d' failed. Stopping further tasks${RESET}" >&2
             exit 1
         fi
     done
 }
 
+# install_if_missing() - Install packages using xbps if they don't exist
+#
+# Installs specified packages using Void Linux's xbps package manager only if they
+# are not already installed
+#
+# Args:
+#   $@: One or more package names to install
 install_if_missing() {
     if ! grep -wq "Void" /etc/os-release; then
-        echo "Not running Void Linux. Task stopped" >&2
+        echo "Not running Void Linux" >&2
         exit 1
     fi
 
@@ -48,7 +66,18 @@ install_if_missing() {
     done
 }
 
+# check_var() - Check if an environment variable exists
+#
+# Verifies if a specified environment variable is set in the current environment
+#
+# Args:
+#   $1: Name of the environment variable to check
 check_var() {
+    if [ $# -ne 1 ]; then
+        echo "Usage: check_var [variable]"
+        exit 1
+    fi
+
     if printenv "$1" >/dev/null 2>&1; then
         echo "Variable '$1' is set"
         return 0
@@ -58,7 +87,18 @@ check_var() {
     fi
 }
 
+# check_service() - Check if a service is enabled using Void's sv program
+#
+# Checks if a service is enabled and running using Void Linux's service manager
+#
+# Args:
+#   $1: Name of the service to check
 check_service() {
+    if [ $# -ne 1 ]; then
+        echo "Usage: check_service [service]"
+        exit 1
+    fi
+
     if sudo sv status "$1" &>/dev/null; then
         echo "Service '$1' is enabled"
         return 0
@@ -68,13 +108,25 @@ check_service() {
     fi
 }
 
+# enable_service() - Enable a service by symlinking its directory to /var/service
+#
+# Creates a symbolic link from the service directory to /var/service and verifies
+# the service starts successfully. Also checks the service status using check_service function
+#
+# Args:
+#   $1: Name of the service to enable
 enable_service() {
     local service_dir="/etc/sv/$1"
     local max_att=5
     local att=0
 
+    if [ $# -ne 1 ]; then
+        echo "Usage: enable_service [service]"
+        exit 1
+    fi
+
     if [ ! -d "$service_dir" ]; then
-        echo "Service '$1' does not exist"
+        echo "${RED}Service '$1' does not exist${RESET}" >&2
         exit 1
     fi
 
@@ -90,7 +142,7 @@ enable_service() {
         echo "Checking $1 status. Attempt $((att + 1)) of $max_att"
         sleep 2
         if check_service "$1" >/dev/null; then
-            echo "Service '$1' has started successfully"
+            echo "${GREEN}Service '$1' has started successfully${RESET}"
             return 0
         fi
         att=$((att + 1))
@@ -100,6 +152,14 @@ enable_service() {
     return 1
 }
 
+# confirm() - Prompt user for yes/no confirmation
+#
+# Prompts the user with a customizable message and returns success (0) for 'yes',
+# failure (1) for 'no'
+#
+# Args:
+#   $1: Custom prompt message to display to user
+#   $2: Default response ('Y' or 'N')
 confirm() {
     if [ $# -ne 2 ]; then
         echo "Usage: confirm [prompt] [Y/N]"
@@ -135,4 +195,110 @@ confirm() {
             echo "Invalid response"
         fi
     done
+}
+
+# build_repo() - Clone git repository and execute commands in temporary directory
+#
+# This function clones a specified git repository to a temporary location and executes
+# provided commands within its directory. Useful when Void Linux repositories lack required
+# programs and manual building is the only option left
+#
+# Args:
+#   $1: Git repository URL (required)
+#   $@: Additional arguments are treated as commands to execute in the repository
+build_repo() {
+    local repo_url="$1"
+    shift
+    local commands=("$@")
+
+    if [ $# -lt 2 ]; then
+        echo "Usage: build_repo [URL] [command1] [command2] [commandN]"
+        exit 1
+    fi
+
+    if [[ ! "$repo_url" =~ ^https?:// ]]; then
+        repo_url="https://$repo_url"
+    fi
+
+    local tmpdir
+    tmpdir=$(mktemp -d)
+    install_if_missing git
+    trap 'rm -rf "$tmpdir"' EXIT
+    (
+        cd "$tmpdir" || exit
+        echo "Cloning into $repo_url"
+        git clone "$repo_url" .
+
+        for cmd in "${commands[@]}"; do
+            if ! eval "$cmd"; then
+                echo "${RED}Command failed: $cmd${RESET}" >&2
+                exit 1
+            fi
+        done
+    )
+}
+
+# download_github_release() - Download an asset from the latest GitHub release
+#
+# Downloads a binary asset from the latest release of a GitHub repository
+# Useful when software isn't available in Void's package repository
+# but the developer provides pre-built binaries on GitHub
+#
+# Args:
+#   $1: Repository identifier in format owner/repo (e.g., torvalds/linux)
+#   $2: Pattern to match the desired asset filename
+#   $3: Local path where the downloaded asset will be saved
+download_github_release() {
+    local repo="$1"
+    local asset_pattern="$2"
+    local output_path="$3"
+
+    if [ $# -ne 3 ]; then
+        echo "Usage: download_github_release owner/repo [asset] [output path]"
+        exit 1
+    fi
+
+    # Construct download url for an asset using github api
+    local api_url="https://api.github.com/repos/$repo/releases/latest"
+    local download_url
+    download_url=$(curl -s "$api_url" |
+        grep "browser_download_url.*$asset_pattern" |
+        cut -d : -f 2,3 |
+        tr -d "\"")
+
+    if [ -z "$download_url" ]; then
+        echo "${RED}Could not find asset matching pattern '$asset_pattern'${RESET}" >&2
+        exit 1
+    fi
+
+    if [ ! -d "$(dirname "$output_path")" ]; then
+        echo "${RED}Directory $(dirname "$output_path") for output file $(basename "$output_path") does not exist${RESET}" >&2
+        exit 1
+    fi
+
+    if [ -e "$output_path" ]; then
+        echo "File $output_path already exists"
+        if ! confirm "Overwrite?" "N"; then
+            exit 1
+        fi
+    fi
+
+    echo -e "${GREEN}Downloading from $download_url\nto $output_path${RESET}"
+
+    # Check if ouput path requires root
+    if ! touch "$output_path" 2>/dev/null; then
+        echo "Output path $output_path requires sudo"
+        if ! sudo curl -L -o "$output_path" $download_url; then
+            echo "${RED}Download failed${RESET}" >&2
+            exit 1
+        fi
+    else
+        if ! curl -L -o "$output_path" $download_url; then
+            echo "${RED}Download failed${RESET}" >&2
+            exit 1
+        fi
+    fi
+
+    echo "Successfully downloaded to $output_path"
+    return 0
 }

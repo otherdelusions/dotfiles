@@ -1,0 +1,56 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing curl
+
+tmpdir=$(mktemp -d)
+
+# Trap the exit to clean up any created tmp directories
+trap 'cd /tmp && rm -rf "$tmpdir"' EXIT
+
+cd "$tmpdir" || exit
+
+DOWNLOAD_URL="https://vencord.dev/download/vesktop/amd64/tar"
+
+# Download tar archive
+echo "Downloading from: $DOWNLOAD_URL"
+if ! curl -L -o vesktop.tar.gz $DOWNLOAD_URL; then
+    echo "Failed to download the archive"
+    exit 1
+fi
+
+if ! tar -xzf "vesktop.tar.gz"; then
+    echo "Failed to extract archive"
+    exit 1
+fi
+
+mkdir -p ~/.local/bin/vesktop
+cp -r */* ~/.local/bin/vesktop/
+
+# Download vesktop icon from their github org (i know, i know)
+curl -L -o ~/.local/bin/vesktop/icon.png "https://avatars.githubusercontent.com/u/113042587?s=48&v=4"
+
+echo "Downloading system24 theme css file to ~/.config/vesktop/themes"
+mkdir -p ~/.config/vesktop/themes
+curl -L -o ~/.config/vesktop/themes/system24.theme.css "https://raw.githubusercontent.com/refact0r/system24/refs/heads/main/theme/system24.theme.css"
+
+echo "Adding .desktop file to $HOME/.local/share/applications"
+cat <<'EOF' >~/.local/share/applications/vesktop.desktop
+[Desktop Entry]
+X-AppImage-Arch=x86_64
+X-AppImage-Version=latest
+X-AppImage-Name=Vesktop
+Name=Vesktop
+Icon=~/.local/bin/vesktop/icon.png
+Terminal=false
+Exec=/usr/bin/env bash -c "exec $HOME/.local/bin/vesktop/vesktop"
+Type=Application
+Terminal=false
+Comment=
+MimeType=x-scheme-handler/discord;
+EOF

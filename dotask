@@ -3,11 +3,16 @@
 usage() {
     echo "Usage: $0 [OPTION] task"
     echo -e "\n[ARGS]"
-    echo "    task         Name of the task to run. All tasks should be placed in ./tasks/ directory"
+    echo "    task         Name of the task to run. All tasks should be placed in ./tasks directory"
     echo "                 Only one task can be specified"
     echo -e "\n[OPTIONS]"
     echo "    -h, --help    Show this message"
 }
+
+if [ ! -d "./tasks" ]; then
+    echo "'tasks' directory not found in $(dirname "$(readlink -f "$0")")"
+    exit 1
+fi
 
 while [[ "$#" -gt 0 ]]; do
     case $1 in

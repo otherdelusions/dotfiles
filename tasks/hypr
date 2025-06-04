@@ -23,6 +23,9 @@ fi
 
 sudo xbps-install -S
 
-install_if_missing hyprland-devel hyprland-protocols
+install_if_missing hyprland-devel hyprland-protocols xdg-desktop-portal-hyprland
 install_if_missing hypridle hyprlock hyprpaper hyprpicker hyprland-qtutils
 install_if_missing wl-clipboard grim slurp
+
+hyprpm add https://github.com/hyprwm/hyprland-plugins
+hyprpm enable hyprbars

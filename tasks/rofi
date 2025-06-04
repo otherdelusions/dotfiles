@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing base-devel meson pkgconf
+install_if_missing glib-devel cairo-devel pango-devel libxkbcommon-devel \
+    gdk-pixbuf-devel wayland-protocols wayland-devel
+
+build_repo github.com/lbonn/rofi \
+    "meson setup build -Dxcb=disabled" \
+    "ninja -C build" \
+    "sudo ninja -C build install"

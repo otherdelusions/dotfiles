@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+deps=(
+    fonts
+    dots/gtk
+)
+
+source tasks/common
+resolve_deps
+
+# Task
+
+# Themes
+install_if_missing base-devel gtk4 gnome-themes-extra-gtk libadwaita nodejs
+
+build_repo git.sr.ht/~ved/oxocarbon-gtk \
+    "make" \
+    "sudo make install"
+
+# Icons
+build_repo github.com/nestoris/Win98SE \
+    "sudo mkdir -p /usr/share/icons" \
+    "sudo cp -r \$PWD/SE98 /usr/share/icons"
+
+gtk_script="$HOME/.config/gtk-3.0/import-gsettings.sh"
+
+if [ ! -x "$gtk_script" ]; then
+    echo "$gtk_script doesn't exist or isn't executable" >&2
+    exit 1
+fi
+
+"$gtk_script"

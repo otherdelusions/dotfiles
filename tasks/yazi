@@ -9,8 +9,23 @@ source tasks/common
 resolve_deps
 
 # Task
-install_if_missing yazi ffmpeg 7zip ouch jq fd ripgred ImageMagick poppler wl-clipboard exiftool mediainfo
+install_if_missing yazi ffmpeg 7zip ouch jq fd \
+    ripgrep ImageMagick poppler wl-clipboard exiftool \
+    mediainfo udisks2 resvg
 
-ya pack -a ndtoan96/ouch
-ya pack -a Rolv-Apneseth/starship
-ya pack -a boydaihungst/mediainfo
+# maybe replace these with piper plugin
+ya pkg add ndtoan96/ouch
+ya pkg add Rolv-Apneseth/starship
+ya pkg add yazi-rs/plugins:piper
+ya pkg add yazi-rs/plugins:mount
+# ya pkg add boydaihungst/mediainfo
+
+install_if_missing base-devel cmake openssl-devel tbb-devel libvips-devel \
+    xcb-util-image-devel extra-cmake-modules wayland-devel wayland-protocols \
+    chafa-devel
+
+build_repo github.com/jstkdng/ueberzugpp \
+    "mkdir build && cd build" \
+    "cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_X11=OFF -DENABLE_OPENCV=OFF -DENABLE_WAYLAND=ON .." \
+    "cmake --build ." \
+    "sudo cmake --install ."

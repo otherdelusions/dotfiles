@@ -9,16 +9,18 @@ deps=(
 source tasks/common
 resolve_deps
 
-#TODO
 # Task
 install_if_missing base-devel helix nodejs taplo yamlfmt rust shfmt shellcheck clang-tools-extra19 lldb19
 
 sudo npm i -g prettier
 sudo npm i -g yaml-language-server@next
 sudo npm i -g vscode-langservers-extracted
-sudo npm i -g bash-language-server
+if [ ! -e "/usr/bin/bash-language-server" ]; then
+    sudo npm install -g bash-language-server
+else
+    echo "bash-language-server is already installed in /usr/bin"
+fi
 
 cargo install --git https://github.com/euclio/mdpls
-
-sudo curl -L -o /usr/bin/marksman "$(curl -s "https://api.github.com/repos/artempyanykh/marksman/releases/latest" | jq -r '.assets[] | select(.name == "marksman-linux-x64") | .browser_download_url')"
+download_github_release "artempyanykh/marksman" "marksman-linux-x64" "/usr/bin/marksman"
 sudo chmod +x /usr/bin/marksman

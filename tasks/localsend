@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/common
+resolve_deps
+
+# Task
+install_if_missing curl
+
+tmpdir=$(mktemp -d)
+
+trap 'cd /tmp && rm -rf "$tmpdir"' EXIT
+
+cd "$tmpdir" || exit
+
+download_github_release "localsend/localsend" "x86-64.tar.gz" "localsend.tar.gz"
+
+if ! tar -xzf "localsend.tar.gz"; then
+    echo "Failed to extract archive"
+    exit 1
+fi
+
+mkdir -p ~/.local/bin/localsend
+cp -r localsend_app ~/.local/bin/localsend/localsend_app
+cp -r data/ ~/.local/bin/localsend/
+cp -r lib/ ~/.local/bin/localsend/
+
+echo "Adding .desktop file to $HOME/.local/share/applications"
+cat <<'EOF' >~/.local/share/applications/localsend.desktop
+[Desktop Entry]
+X-AppImage-Arch=x86_64
+X-AppImage-Version=latest
+X-AppImage-Name=LocalSend
+Name=LocalSend
+Exec=/usr/bin/env bash -c "exec $HOME/.local/bin/localsend/localsend_app"
+Icon=internet-chat
+Type=Application
+Terminal=false
+Categories=Utility;
+Comment=
+EOF

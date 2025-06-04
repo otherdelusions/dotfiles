@@ -2,9 +2,7 @@
 
 deps=()
 
-source tasks/common
 source tasks/dots/common
-
 resolve_deps
 
 # Task

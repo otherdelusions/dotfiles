@@ -15,7 +15,7 @@ if ! command -v stow >/dev/null; then
     fi
 fi
 
-read -rp "Enter package name to remove: " unstow
+read -rp "Enter package to remove: " unstow
 
 if [ -z "$unstow" ]; then
     echo "No package specified"

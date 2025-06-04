@@ -2,7 +2,32 @@
 
 source tasks/common
 
+# stow_package() - Manage dotfiles using GNU Stow
+#
+# This function helps manage configuration files using GNU Stow
+# Stow creates shortcuts (symbolic links) from your configuration files
+# organized into packages to where they're needed on your system
+#
+# A "package" is a folder containing your configuration files in their correct
+# directory structure
+# For example, if you have a package called 'hypr' with a .config/hypr/hypland.conf
+# file inside it, stowing it will create a shortcut from ~/.config/hypr/hypland.conf
+# to your package's version of the file
+# Useful when you have all your dotfiles placed into packages and need the configuration
+# files in different places for programs to find them (which is mainly ~/.config folder
+# when talking about dotfiles) without copying configs and worrying about them being
+# up to date with your dotfiles folder
+#
+# Args:
+#   $1: Name of the package to stow (e.g., 'hypr', 'nvim', etc.)
+#
+# See 'man stow' for more info
 stow_package() {
+    if [ $# -ne 1 ]; then
+        echo "Usage: stow_package [package]"
+        exit 1
+    fi
+
     if ! command -v stow >/dev/null; then
         if confirm "Stow command not found. Install it using xbps?" "Y"; then
             install_if_missing stow
@@ -13,11 +38,10 @@ stow_package() {
     fi
 
     if ! stow -n --target="$HOME" "$1" &>/dev/null; then
-        echo "You already have $1 config files!"
-        echo "Backup/remove them and try again"
+        echo -e "You already have $1 config files!\nBackup/remove them and try again" >&2
         exit 1
     fi
 
-    echo -e "Stowing package: $1"
+    echo "Stowing package: $1"
     stow --verbose --restow --target="$HOME" "$1"
 }
