@@ -30,14 +30,11 @@ echo "Adding .desktop file to $HOME/.local/share/applications"
 mkdir -p ~/.local/share/applications
 cat <<'EOF' >~/.local/share/applications/localsend.desktop
 [Desktop Entry]
-X-AppImage-Arch=x86_64
-X-AppImage-Version=latest
-X-AppImage-Name=LocalSend
 Name=LocalSend
-Exec=/usr/bin/env bash -c "exec $HOME/.local/bin/localsend/localsend_app"
 Icon=internet-chat
-Type=Application
+Comment=An open-source cross-platform alternative to AirDrop
 Terminal=false
-Categories=Utility;
-Comment=
+Exec=/usr/bin/env bash -c "exec $HOME/.local/bin/localsend/localsend_app"
+Type=Application
+Categories=Utility;FileTools;
 EOF

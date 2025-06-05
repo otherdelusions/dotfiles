@@ -28,3 +28,19 @@ build_repo github.com/jstkdng/ueberzugpp \
     "cmake -DCMAKE_BUILD_TYPE=Release -DENABLE_X11=OFF -DENABLE_OPENCV=OFF -DENABLE_WAYLAND=ON .." \
     "cmake --build ." \
     "sudo cmake --install ."
+
+echo "Adding .desktop file to $HOME/.local/share/applications"
+mkdir -p ~/.local/share/applications
+cat <<'EOF' >~/.local/share/applications/yazi.desktop
+[Desktop Entry]
+Name=Yazi
+Icon=system-file-manager
+Comment=Blazing fast terminal file manager written in Rust, based on async I/O
+Terminal=true
+TryExec=yazi
+Exec=yazi %u
+Type=Application
+MimeType=inode/directory
+Categories=Utility;Core;System;FileTools;FileManager;ConsoleOnly
+Keywords=File;Manager;Explorer;Browser;Launcher
+EOF
