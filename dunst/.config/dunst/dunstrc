@@ -1,6 +1,6 @@
 [global]
 	width = (50, 300)
-	offset = 20x20
+	offset = (20, 20)
 	sort = update
 	
 	frame_width = 2
@@ -15,20 +15,22 @@
 
 	dmenu = /usr/local/bin/rofi
 
-	icon_theme = "Adwaita"
-	icon_path = "/usr/share/icons/Adwaita/symbolic/status"
-	default_icon = "dialog-information-symbolic"
+	icon_theme = "SE98"
+	icon_path = "/usr/share/icons/SE98/status/48"
+	default_icon = "notification-symbolic"
 	min_icon_size = 24
 	
 	force_xwayland = false	
 
 [urgency_low]
 	timeout = 3
+	default_icon = "notification-symbolic"
 	
 [urgency_normal]
 	timeout = 6
+	default_icon = "dialog-information-symbolic"
 	
 [urgency_critical]
 	timeout = 20
 	frame_color = "#ca4780"
-	default_icon = "dialog-warning-symbolic"
+	default_icon = "dialog-error-symbolic"
