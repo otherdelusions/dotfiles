@@ -21,7 +21,7 @@ install_if_missing yazi ffmpeg 7zip ouch jq fd \
 
 install_if_missing base-devel cmake openssl-devel tbb-devel libvips-devel \
     xcb-util-image-devel extra-cmake-modules wayland-devel wayland-protocols \
-    chafa-devel
+    chafa-devel libsixel-devel
 
 build_repo github.com/jstkdng/ueberzugpp \
     "mkdir build && cd build" \

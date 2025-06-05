@@ -13,15 +13,11 @@ if ! lspci | grep -i vga | grep -qi intel; then
 fi
 
 install_if_missing intel-ucode
-if [ "$(grep microcode /proc/cpuinfo | cut -d: -f2 | head -n 1)" == "0xffffffff" ]; then
-    if confirm "Apply initramfs configuration changes?" "Y"; then
-        sudo xbps-reconfigure --force linux"$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')"
-        echo "Regenerated initramfs"
-    else
-        echo "Skipped initramfs"
-    fi
+if confirm "Apply initramfs configuration changes?" "Y"; then
+    sudo xbps-reconfigure --force linux"$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')"
+    echo "Regenerated initramfs"
 else
-    echo "Mircocode is loaded"
+    echo "Skipped initramfs"
 fi
 
 install_if_missing mesa-intel-dri vulkan-loader intel-video-accel

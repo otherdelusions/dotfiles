@@ -140,7 +140,7 @@ enable_service() {
 
     while [ $att -lt $max_att ]; do
         echo "Checking $1 status. Attempt $((att + 1)) of $max_att"
-        sleep 2
+        sleep 4
         if check_service "$1" >/dev/null; then
             echo "${GREEN}Service '$1' has started successfully${RESET}"
             return 0
