@@ -71,7 +71,6 @@ configuration {
          delay:  0;
        }
 
-	// libxkbcommon now sends Alt as Alt+Meta to Rofi
-	kb-mode-next: "Alt+Meta+Tab";
-	kb-mode-previous: "Alt+Meta+Control+Tab";
+	kb-mode-next: "Alt+Tab";
+	kb-mode-previous: "Alt+Control+Tab";
 }
