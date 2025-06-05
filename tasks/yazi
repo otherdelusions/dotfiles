@@ -13,11 +13,10 @@ install_if_missing yazi ffmpeg 7zip ouch jq fd \
     ripgrep ImageMagick poppler wl-clipboard exiftool \
     mediainfo udisks2 resvg
 
-# maybe replace these with piper plugin
-ya pkg add ndtoan96/ouch
-ya pkg add Rolv-Apneseth/starship
-ya pkg add yazi-rs/plugins:piper
-ya pkg add yazi-rs/plugins:mount
+# ya pkg add ndtoan96/ouch
+# ya pkg add Rolv-Apneseth/starship
+# ya pkg add yazi-rs/plugins:piper
+# ya pkg add yazi-rs/plugins:mount
 # ya pkg add boydaihungst/mediainfo
 
 install_if_missing base-devel cmake openssl-devel tbb-devel libvips-devel \
