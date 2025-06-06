@@ -12,6 +12,8 @@ if ! lspci | grep -i vga | grep -qi intel; then
     fi
 fi
 
+install_if_missing void-repo-nonfree && sudo xbps-install -Su
+
 install_if_missing intel-ucode
 if confirm "Apply initramfs configuration changes?" "Y"; then
     sudo xbps-reconfigure --force linux"$(uname -a | awk '{print $3}' | awk -F. '{print $1"."$2}')"

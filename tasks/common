@@ -24,6 +24,11 @@ fi
 # It should be called at the beginning of a task to ensure all prerequisites are met
 # Requires "deps" array to be present in task script
 resolve_deps() {
+    if ! declare -p deps &>/dev/null; then
+        echo "Error: deps array must be declared in the script" >&2
+        exit 1
+    fi
+
     for d in "${deps[@]}"; do
         if [[ "$d" == "$(basename "$0")" ]]; then
             echo "Tasks dependency is the task itself" >&2
