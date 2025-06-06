@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+if [[ ($ROFI_RETV == 1) ]]; then
+    if ! command -v gpu-screen-recorder >/dev/null; then
+        notify-send --urgency=normal "Screen Record" "gpu-screen-recorder doesn't appear to be installed"
+        exit 0
+    fi
+fi
+
 if [ "$*" = "Record Screen" ] && ! pgrep -f "gpu-screen-recorder" >/dev/null; then
     dunstctl close-all
     nohup gpu-screen-recorder \
