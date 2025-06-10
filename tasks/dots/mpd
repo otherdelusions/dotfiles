@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+deps=()
+
+source tasks/dots/common
+resolve_deps
+
+# Task
+stow_package "$(basename "$0")"
