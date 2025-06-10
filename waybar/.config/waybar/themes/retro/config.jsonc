@@ -74,8 +74,7 @@
     "escape": true,
     "rotate": 90,
     "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next && playerctl play",
-    "on-click-middle": "playerctl shuffle toggle",
+    "on-click-right": "$HOME/.config/rofi/scripts/musicremote.sh",
     "exec": "$HOME/.config/waybar/follow_player.sh"
   },
 

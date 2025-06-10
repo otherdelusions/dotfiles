@@ -63,7 +63,8 @@ window#waybar {
 }
 
 /* Media Control */
-#custom-media {
+#custom-media,
+#mpd {
   background-color: transparent;
   color: @bright-gray;
   padding: 10px 0;

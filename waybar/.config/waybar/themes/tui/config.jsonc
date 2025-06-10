@@ -8,12 +8,7 @@
   "margin-right": 0,
   "margin-left": 0,
 
-  "modules-left": [
-    "hyprland/workspaces",
-    "clock",
-    "clock#date",
-    "custom/media"
-  ],
+  "modules-left": ["hyprland/workspaces", "clock", "clock#date", "mpd"],
 
   "modules-right": [
     "tray",
@@ -102,14 +97,49 @@
     "format": "│"
   },
 
+  "mpd": {
+    "rotate": 90,
+    "format": "{stateIcon} {consumeIcon} {randomIcon} {repeatIcon}{singleIcon} {title} - {artist} 󰎇",
+    "format-disconnected": "󰎇",
+    "format-stopped": "󰎇",
+    "interval": 1,
+
+    "artist-len": 15,
+    "title-len": 15,
+
+    "justify": "center",
+
+    "on-click": "sh -c 'if [ \"$(mpc status %state%)\" = \"paused\" ]; then mpc play -q; else mpc pause -q; fi'",
+    "on-click-right": "$HOME/.config/rofi/scripts/musicremote.sh",
+
+    "consume-icons": {
+      "on": " "
+    },
+    "random-icons": {
+      "off": "󰒞",
+      "on": "󰒝"
+    },
+    "repeat-icons": {
+      "on": "󰑖"
+    },
+    "single-icons": {
+      "on": "󰑘"
+    },
+    "state-icons": {
+      "paused": "󰏤",
+      "playing": "󰐊"
+    },
+
+    "tooltip": false
+  },
+
   "custom/media": {
     "rotate": 90,
     "format": "{}",
     "max-length": 40,
     "escape": true,
     "on-click": "playerctl play-pause",
-    "on-click-right": "playerctl next && playerctl play",
-    "on-click-middle": "playerctl shuffle toggle",
+    "on-click-right": "$HOME/.config/rofi/scripts/musicremote.sh",
     "exec": "$HOME/.config/waybar/follow_player.sh"
   },
 
