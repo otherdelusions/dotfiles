@@ -1,0 +1,137 @@
+configuration {
+    //modi: "drun,run,window";
+    show-icons: true;
+    display-drun: "drun";
+    display-run: "run";
+    display-window: "window";
+    window-format: "{t}";
+}
+
+@theme "~/.config/rofi/themes/assets/carbonfox.rasi"
+
+/* MAIN WINDOW */
+window {
+    anchor:     west;
+    location:   west;
+    x-offset: 10px;
+    transparency: "real";
+    width: 300px;
+
+    enabled: true;
+    cursor: "default";
+}
+
+/* MAIN BOX */
+mainbox {
+    enabled: true;
+    background-color: @background;
+    children: [ "inputbar", "listview"];
+}
+
+/* INPUT BAR */
+inputbar {
+    enabled: true;
+    margin: 6px;
+    background-image: url("/tmp/cover.png");
+    padding: 210px 0 0 0;
+    expand: false;
+    children: [ "prompt" ];
+}
+
+prompt {
+    enabled: true;
+    padding: 10px;
+    background-color: #1d1d1d;
+    border: 1px;
+    border-color: #2C2C2C;
+    text-color: @dim-foreground;    
+}
+
+entry {
+    enabled: true;
+    padding: 10px;
+    margin: 0 0 0 6px;
+    border: 1px;
+    border-color: @magenta;
+    background-color: #1D1D1D;
+    text-color: @dim-foreground;
+    cursor: text;
+    placeholder: "search";
+    placeholder-color: @bright-black;
+}
+
+/* LIST VIEW */
+listview {
+    enabled: true;
+    columns: 1;
+    lines: 6;
+    cycle: true;
+    dynamic: false;
+    scrollbar: false;
+    layout: horizontal;
+    reverse: false;
+    fixed-height: false;
+    fixed-columns: false;
+    spacing: 10px;
+    
+    margin: 0px 6px 6px 6px;
+    background-color: transparent;
+}
+
+/* ELEMENTS */
+element {
+    enabled: true;
+    padding: 8px 4px;
+    background-color: #1d1d1d;
+    border: 1px;
+    border-color: #2C2C2C;
+    text-color: @dim-foreground;    
+}
+
+element active {
+    background-color: #1d1d1d;
+    text-color: @foreground;
+}
+
+element selected.normal {
+    background-color: @black;
+}
+
+element selected.active {
+    background-color: @black;
+    text-color: @magenta;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 0px;
+    padding: 0;
+}
+
+element-text {
+    font: "Iosevka Nerd Font 18";
+    background-color: transparent;
+    text-color: inherit;
+    highlight: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.5;
+}
+
+/* MESSAGE */
+message {
+    enabled: true;
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+textbox {
+    padding: 10px;
+    background-color: @background;
+    text-color: @foreground;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    highlight: none;
+    placeholder-color: @foreground;
+    blink: true;
+    markup: true;
+}
