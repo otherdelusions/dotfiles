@@ -41,3 +41,5 @@ function yazi() {
 
 eval "$(starship init bash)"
 trap 'set_win_title' DEBUG
+
+source "$HOME/.cargo/env"
