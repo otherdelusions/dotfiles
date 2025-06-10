@@ -42,7 +42,7 @@ resolve_deps() {
 
         echo -e "${GREEN}Running dependency task '$d' of task '$(basename "${BASH_SOURCE[1]}")'${RESET}\n"
         if ! ./dotask "$d"; then
-            echo "${RED}Dependency task '$d' failed. Stopping further tasks${RESET}" >&2
+            echo -e "${RED}Dependency task '$d' failed. Stopping further tasks${RESET}" >&2
             exit 1
         fi
     done
@@ -131,7 +131,7 @@ enable_service() {
     fi
 
     if [ ! -d "$service_dir" ]; then
-        echo "${RED}Service '$1' does not exist${RESET}" >&2
+        echo -e "${RED}Service '$1' does not exist${RESET}" >&2
         exit 1
     fi
 
@@ -147,7 +147,7 @@ enable_service() {
         echo "Checking $1 status. Attempt $((att + 1)) of $max_att"
         sleep 4
         if check_service "$1" >/dev/null; then
-            echo "${GREEN}Service '$1' has started successfully${RESET}"
+            echo -e "${GREEN}Service '$1' has started successfully${RESET}"
             return 0
         fi
         att=$((att + 1))
@@ -236,7 +236,7 @@ build_repo() {
 
         for cmd in "${commands[@]}"; do
             if ! eval "$cmd"; then
-                echo "${RED}Command failed: $cmd${RESET}" >&2
+                echo -e "${RED}Command failed: $cmd${RESET}" >&2
                 exit 1
             fi
         done
@@ -272,12 +272,12 @@ download_github_release() {
         tr -d "\"")
 
     if [ -z "$download_url" ]; then
-        echo "${RED}Could not find asset matching pattern '$asset_pattern'${RESET}" >&2
+        echo -e "${RED}Could not find asset matching pattern '$asset_pattern'${RESET}" >&2
         exit 1
     fi
 
     if [ ! -d "$(dirname "$output_path")" ]; then
-        echo "${RED}Directory $(dirname "$output_path") for output file $(basename "$output_path") does not exist${RESET}" >&2
+        echo -e "${RED}Directory $(dirname "$output_path") for output file $(basename "$output_path") does not exist${RESET}" >&2
         exit 1
     fi
 
@@ -294,12 +294,12 @@ download_github_release() {
     if ! touch "$output_path" 2>/dev/null; then
         echo "Output path $output_path requires sudo"
         if ! sudo curl -L -o "$output_path" $download_url; then
-            echo "${RED}Download failed${RESET}" >&2
+            echo -e "${RED}Download failed${RESET}" >&2
             exit 1
         fi
     else
         if ! curl -L -o "$output_path" $download_url; then
-            echo "${RED}Download failed${RESET}" >&2
+            echo -e "${RED}Download failed${RESET}" >&2
             exit 1
         fi
     fi
